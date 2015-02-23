@@ -1,0 +1,104 @@
+
+/* Recommended for Windows 8 Phone */
+/* SOURCE: http://www.excellentwebworld.com/common-problems-solution-for-windows-phone-8-phonegap */
+html {
+    -ms-touch-action: pan-x ;
+    }
+
+/* Recommended for Windows 8 Phone */
+/* SOURCE: http://www.excellentwebworld.com/common-problems-solution-for-windows-phone-8-phonegap */
+body {
+    -ms-touch-action: pan-y ;
+    -ms-content-zooming: none ;
+    }
+
+body,ul,li {
+    padding:30px;
+    margin:0px;
+    border:0px;
+    overflow: auto;
+        
+}
+ 
+body {
+    font-family: Tahoma;
+}
+/* allow copy-paste */
+input, textarea  {
+    -webkit-user-select: text ; -moz-user-select: text ; -ms-user-select: text ; user-select: text ;
+}
+
+#keypad {
+    width: 100%;    
+    position: fixed;
+    display: table;
+    bottom: 0px; 
+    left: 0px;
+}
+
+#keypad table {
+	width: 100%;    
+    text-align:center; 
+	border:0px solid #000000; 
+	font-size:24px; 
+	font-weight:bold; 
+    cursor:pointer; 
+	background-color:#666666; 
+	color:#CCCCCC;   
+}
+
+#keypad tr td {
+    width: 14%;
+    height: 30px;
+    text-align: center;
+ }
+
+#keypad tr td:hover {background-color:#999999; color:#FFFF00;
+}
+
+#menuoptions {
+    width: 99vw;    
+    top: 0px; 
+    left: 0px;    
+    background-color: #ccc;
+    }
+
+.grids {
+  border-style: solid;
+  border-width: 5px;
+}
+
+#reperesmenu {    
+    width: 99vw;    
+    position: fixed;
+    top: 135px; 
+    height: 30px;
+    }
+
+#reperesmenu table {
+	width: 100%;    
+    text-align:center; 
+	border:0px solid #000000; 
+	font-size:24px; 
+	font-weight:bold; 
+    cursor:pointer; 
+	background-color:#666666; 
+	color:#CCCCCC;   
+}
+
+
+.grids div { /* all blocks */
+  display: table;
+  height: 153px;
+}
+
+.grids div > p {
+  display: table-cell;
+  text-align: center;
+}
+
+.ui-slider-switch { width: 8em !important }
+
+.ui-filter-inset {
+    margin-top: 0;
+}
