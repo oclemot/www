@@ -9,6 +9,7 @@ function closeInput(elm) {
     td.removeChild(elm);
     td.innerHTML = value;    
     joueursname [i] = value;
+    //commentaire
 }
 
 
@@ -225,7 +226,7 @@ function addInputNumber(elm, idmode)
         var tmp = document.getElementById(currentcell);
         currbg = tmp.style.backgroundColor;
 
-        xblink = setInterval("blinkcell(currentcell)", 300);
+        xblink = setInterval("blinkcell(currentcell)", 200);
 
         affichekeypad(idmode);
 
@@ -255,13 +256,7 @@ function clearscorecard ()
 
 function addkey(key, idobject){    
 
-    //alert ("idobject ="+idobject);
-    // alert ("key= "+key);   
-    
-    //alert (idobject);
-    
     var td=document.getElementById(idobject);
-    
     var tmp = String(idobject);
     var pos = tmp.indexOf ("P"); 
     var tmp3=tmp.slice (pos+2, pos+5);
@@ -273,6 +268,7 @@ function addkey(key, idobject){
     var tmp4=td.innerHTML;
     
     if (tmp3==="Idx"){
+    //modify index    
         scoreallowed=false;
         //joueuridx[currentplayer][0]=key;
         if (key===66) {
@@ -285,19 +281,42 @@ function addkey(key, idobject){
             key="";
             effacecoupsrecus();
         }
+        if (key===77){
+            cachekeypad();
+            clearInterval(xblink);
+            td.style.backgroundColor=currbg;
+            //alert ("currentplayer=" + currentplayer);
+            if (parseFloat(td.innerHTML)>54) td.innerHTML="54";
+            joueursindex[currentplayer]=parseFloat(td.innerHTML);
+            //alert ("indexjoueur ="+ joueursindex[currentplayer]);
+            if (gamemode==2){
+                calculecoupsrecus ();
+                effacecoupsrecus();
+                affichecoupsrecus ();
+
+                for (ff=1;ff<=b18T;ff++){
+                    calculepointsnet(ff);
+                    affichescoresnet(ff);
+                }
+                affichetotaux ();
+            }
+            scoreallowed=true;
+            return;
+        }
+        td.innerHTML+=key;
     }
     else {    
-
+        //modify score
+        
         var tmp3 = tmp.slice(1,pos);
         var currenthole = parseInt (tmp3);
 
         if (key===67) {
+        // cancel
             key=0;
-            td.innerHTML="0";
         }
+        td.innerHTML=key;
         score[currenthole][currentplayer]= parseInt(key);
-        //alert ("score ="+ score[currenthole][currentplayer]);
-        
         
         calculepointsnet (currenthole);  
         calculetotaux();
@@ -305,33 +324,7 @@ function addkey(key, idobject){
         cachekeypad();
         clearInterval(xblink);
         td.style.backgroundColor=currbg;
-        td.innerHTML="";
     }
-    if (key===77){
-        cachekeypad();
-        clearInterval(xblink);
-        td.style.backgroundColor=currbg;
-        //alert ("currentplayer=" + currentplayer);
-        if (parseFloat(td.innerHTML)>54) td.innerHTML="54";
-        joueursindex[currentplayer]=parseFloat(td.innerHTML);
-        //alert ("indexjoueur ="+ joueursindex[currentplayer]);
-        if (gamemode==2){
-            calculecoupsrecus ();
-            effacecoupsrecus();
-            affichecoupsrecus ();
-
-            for (ff=1;ff<=b18T;ff++){
-                calculepointsnet(ff);
-                affichescoresnet(ff);
-            }
-            affichetotaux ();
-        }
-        scoreallowed=true;
-        return;
-    }
-    if (td.innerHTML==='0') td.innerHTML='';
-    else td.innerHTML+=key;
-    //alert ("cache");
 }
 
 
