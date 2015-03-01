@@ -31,7 +31,7 @@
     $message.=$tableData["coursename"];
 	//$message.="Pacours test";
     $message.="</td> </tr>";
-	$message.="<tr style=\"background-color:#94c1f5\" > <td colspan=\"3\" > </td>". "\r\n";
+	$message.="<tr style=\"align:center; background-color:#94c1f5\" > <td colspan=\"3\" > </td>". "\r\n";
     
 //Ligne JOUEURS    
     
@@ -42,29 +42,32 @@
     }
     $message.="</tr>";
 	
-	$message.=" <tr style=\"background-color:#94c1f5;text-align:center\"> <td colspan=\"3\" >Index/Départ</td>". "\r\n";      
+	$message.=" <tr style=\"background-color:#94c1f5;text-align:center;align:center;\"> <td colspan=\"3\" >Index/Départ</td>". "\r\n";      
     
 //Ligne INDEX
       
     for ($i=1;$i<=$nbjoueurs;$i++){
         $message.= "<td>";
 		$message.=strval ($tableData["joueursindex"][$i-1]);
-		$message.="</td> <td>";
+		$message.="</td> ";
 	
-		 switch ($tableData["joueursreperes"][$i-1]){
+		$message.="<td width='12' height='12' bgcolor=";
+		
+		switch ($tableData["joueursreperes"][$i-1]){
          case 1:
-            //    $message.="<img src = 'http://www.clemot.com/scorecard/www/images/reper_blanc.gif'  alt='repere blanc'/> ";
-                break;
+        	$message.="'#fff'";
+			break;
          case 2:
-             //   $message.="<img src = 'http://www.clemot.com/scorecard/www/images/reper_jaune.gif'  alt='repere jaune'/> ";
+			$message.="'#f5ec08'";
 				break;
          case 3:
-             //   $message.="<img src = 'http://www.clemot.com/scorecard/www/images/reper_bleu.gif'  alt='repere bleu'/> ";
-                break;
+            $message.="'#000091'";
+			    break;
          case 4:
-             //   $message.="<img src = 'http://www.clemot.com/scorecard/www/images/reper_rouge.gif'  alt='repere rouge'/> ";
-                break;
+            $message.="'#f00'";
+			    break;
 		}
+		$message.=" style='align:center; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; color: #ffffff; display: block;'>";
 		
 		$message.="</td>" . "\r\n";
         }
@@ -91,18 +94,18 @@
 		$message.=strval($i);
 		$message.=" </td> ";
 		$message.=" <td> ";
-		$message.=strval ($tableData["coursepar"][$i-1]);
+		$message.=strval ($tableData["coursepar"][$i]);
 		$message.=" </td> ". "\r\n";
 		$message.=" <td> ";
-		$message.=strval ($tableData["coursehcp"][$i-1]);
+		$message.=strval ($tableData["coursehcp"][$i]);
 		$message.=" </td> ". "\r\n";
 
 		for ($j=1;$j<=$nbjoueurs;$j++){
           $message.= " <td> ";
-		  $message.= strval ($tableData["score0"][$i-1][$j-1]);
+		  $message.= strval ($tableData["score0"][$i][$j-1]);
 		  $message.=" </td> ";
           $message.=" <td style=\"background-color:#d8d8d8\" > ";
-		  $message.= strval ($tableData["points0"][$i-1][$j-1]);
+		  $message.= strval ($tableData["points0"][$i][$j-1]);
 		  $message.=" </td> ". "\r\n";
         }
 		$message.=" </tr> "; 
@@ -134,17 +137,17 @@
 			$message.=strval($i);
 			$message.="</td>";
 			$message.=" <td>";
-			$message.=strval ($tableData["coursepar"][$i-1]);
+			$message.=strval ($tableData["coursepar"][$i]);
 			$message.=" </td>";
 			$message.=" <td> ";
-			$message.=strval($tableData["coursehcp"][$i-1]);
+			$message.=strval($tableData["coursehcp"][$i]);
 			$message.=" </td>". "\r\n";
 			for ($j=1;$j<=$nbjoueurs;$j++){
 		      $message.= " <td>";
-			  $message.= strval ($tableData["score0"][$i-1][$j-1]);
+			  $message.= strval ($tableData["score0"][$i][$j-1]);
 			  $message.=" </td>";
 			  $message.="<td style=\"background-color:#d8d8d8\">";
-			  $message.= strval ($tableData["points0"][$i-1][$j-1]);
+			  $message.= strval ($tableData["points0"][$i][$j-1]);
 			  $message.=" </td>". "\r\n";
 			 }
 			$message.=" </tr> "; 
@@ -185,9 +188,9 @@
         $message.="<tr style=\"background-color:#8bed73\" > <td colspan=\"3\" >Total</td> ";
         for ($i=1;$i<=$nbjoueurs;$i++){
 			$message.=" <td> ";
-			$message.= strval ($tableData["score0"][19][$i-1]);
+			$message.= strval ($tableData["score0"][20][$i-1]);
 			$message.=" </td> <td> ";
-			$message.= strval ($tableData["points0"][19][$i-1]);
+			$message.= strval ($tableData["points0"][20][$i-1]);
 			$message.=" </td> ". "\r\n\r\n";
 		}
     $message.=" </tr> ";

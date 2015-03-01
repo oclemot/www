@@ -36,29 +36,28 @@
 // init variables
 function init_variables ()
 {
-    if (nbjoueurs===undefined)  nbjoueurs= 3;    
-    if (gamemode===undefined) gamemode = 1; //chouette
-    if (b18T===undefined) b18T =18;
-    if (currentcell===undefined) currentcell="";
+    nbjoueurs= 3;    
+    gamemode = 1; //chouette
+    b18T =18;
+    currentcell="";
 
     for (i=1; i<22; i++){  
-        if (score[i]===undefined) score[i]=new Array();
-        if (points[i]===undefined) points[i]=new Array();
-        if (coupsrecus[i]===undefined) coupsrecus[i]=new Array();
+        score[i]=new Array();
+        points[i]=new Array();
+        coupsrecus[i]=new Array();
         
         for (j=0;j<4;j++){
-            if (score[i][j]===undefined) score[i][j]=0;
-            if (points[i][j]===undefined) points[i][j]=0;
-            if (coupsrecus[i][j]===undefined) coupsrecus[i][j]=0;
-            if (joueursindex[j]===undefined) joueursindex[j]=0;
-            if (joueursreperes[j]===undefined) joueursreperes[j]=1;
-            if (joueursname[j]===undefined) joueursname[j]="joueur"+String(j);
+            score[i][j]=0;
+            points[i][j]=0;
+            coupsrecus[i][j]=0;
+            joueursindex[j]=0;
+            joueursreperes[j]=1;
+            joueursname[j]="joueur"+String(j);
         }
     }
     
-    if (flag===undefined) flag = 1;
-    
-    if (courseindex===undefined) courseindex=1;
+    flag = 1;
+    courseindex=1;
     init_parcours (courseindex);
 }
 

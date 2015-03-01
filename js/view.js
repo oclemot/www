@@ -4,7 +4,7 @@ function createdialogmail()
     document.getElementById("menumail").innerHTML = "";
 
     
-    strtable+="<h1>Envoie les résultats du jour...</h1><br>";
+    strtable+="Envoie les résultats...<br>";
     strtable+="<form id='menumail2' style='text-align:left;margin-left=30px;margin-right=30px;vertical-align:center'>";
 
     strtable+="<div class='ui-grid-a'>";

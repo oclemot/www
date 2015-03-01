@@ -239,6 +239,7 @@ function clearscorecard ()
 {
      for (i=1; i<22; i++){  
                 for (j=0;j<4;j++){
+    //                alert (i+" "+j);
                     score[i][j]=0;
                     points[i][j]=0;
                 }
@@ -415,6 +416,8 @@ function mail_send () {
    
        // tablehtml+=json = array2json(score)
    
+//    alert ("mail");
+    
     var tmpstr = $('#menumail2').serialize();
     //alert (tmpstr);
     //input_data+=table;
@@ -425,8 +428,8 @@ function mail_send () {
     scoremail = score;
     pointsmail = points;
     
-    scoremail.shift();
-    pointsmail.shift();
+    //scoremail.shift();
+    //pointsmail.shift();
   
     
     var input_data ={
