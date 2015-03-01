@@ -16,7 +16,7 @@
 	
 	$message.="<head><title>Les scores du jour</title></head><body>";
 	
-    $message.="<table style=\"text-align:center\" border=\"1\" cellpadding=\"2\" cellspacing=\"2\">";
+    $message.="<table style=\"align:center;text-align:center;\" border=\"1\" cellpadding=\"2\" cellspacing=\"2\">";
 	$message.="<tr style=\"background-color:#94c1f5\">";
     
     $message.="<td style=\"text-align:center\" colspan=\"";
@@ -42,7 +42,7 @@
     }
     $message.="</tr>";
 	
-	$message.=" <tr style=\"background-color:#94c1f5;text-align:center;align:center;\"> <td colspan=\"3\" >Index/Départ</td>". "\r\n";      
+	$message.=" <tr style=\"align:center;background-color:#94c1f5;text-align:center;\"> <td colspan=\"3\" >Index/Départ</td>". "\r\n";      
     
 //Ligne INDEX
       
@@ -51,7 +51,7 @@
 		$message.=strval ($tableData["joueursindex"][$i-1]);
 		$message.="</td> ";
 	
-		$message.="<td width='12' height='12' bgcolor=";
+		$message.="<td width='10' height='10' bgcolor=";
 		
 		switch ($tableData["joueursreperes"][$i-1]){
          case 1:
@@ -59,13 +59,13 @@
 			break;
          case 2:
 			$message.="'#f5ec08'";
-				break;
+			break;
          case 3:
             $message.="'#000091'";
-			    break;
+			break;
          case 4:
             $message.="'#f00'";
-			    break;
+			break;
 		}
 		$message.=" style='align:center; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; color: #ffffff; display: block;'>";
 		
@@ -121,9 +121,9 @@
         
         for ($i=1;$i<=$nbjoueurs;$i++){
         $message.="<td>";
-		$message.= strval ($tableData["score0"][18][$i-1]);
+		$message.= strval ($tableData["score0"][19][$i-1]);
 		$message.="</td> <td>";
-		$message.= strval ($tableData["points0"][18][$i-1]);
+		$message.= strval ($tableData["points0"][19][$i-1]);
 		$message.="</td>". "\r\n";
         }  
 
@@ -159,9 +159,9 @@
         
 		for ($i=1;$i<=$nbjoueurs;$i++){
 			$message.="<td>";
-			$message.= strval ($tableData["score0"][19][$i-1]);
+			$message.= strval ($tableData["score0"][20][$i-1]);
 			$message.="</td> <td> ";
-			$message.= strval ($tableData["points0"][19][$i-1]);
+			$message.= strval ($tableData["points0"][20][$i-1]);
 			$message.=" </td> ". "\r\n";
 		}       
 		$message.=" </tr> ";
@@ -172,9 +172,9 @@
         //LIgnes OUT (répétée)
 		for ($i=1;$i<=$nbjoueurs;$i++){
 				$message.="<td>";
-				$message.= strval ($tableData["score0"][18][$i-1]);
+				$message.= strval ($tableData["score0"][19][$i-1]);
 				$message.="</td> <td> ";
-				$message.= strval ($tableData["points0"][18][$i-1]);
+				$message.= strval ($tableData["points0"][19][$i-1]);
 				$message.=" </td>". "\r\n";
             }
 		
@@ -188,9 +188,9 @@
         $message.="<tr style=\"background-color:#8bed73\" > <td colspan=\"3\" >Total</td> ";
         for ($i=1;$i<=$nbjoueurs;$i++){
 			$message.=" <td> ";
-			$message.= strval ($tableData["score0"][20][$i-1]);
+			$message.= strval ($tableData["score0"][21][$i-1]);
 			$message.=" </td> <td> ";
-			$message.= strval ($tableData["points0"][20][$i-1]);
+			$message.= strval ($tableData["points0"][21][$i-1]);
 			$message.=" </td> ". "\r\n\r\n";
 		}
     $message.=" </tr> ";

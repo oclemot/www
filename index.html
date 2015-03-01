@@ -7,8 +7,8 @@
 
 * Please see the included README.md file for license terms and conditions.
   ---->
-    <head>
-    <title>La chouette c'est chouette !</title>
+<head>
+<title>La chouette c'est chouette !</title>
     
     <link rel = "apple-touch-icon" href = "images/golf.png" />
     <link rel = "apple-touch-icon-precomposed" href = "images/golf.png" />
@@ -27,28 +27,26 @@
         /*@-ms-viewport { user-zoom: zoom ; min-zoom: 100% ; max-zoom: 200% ; }   @viewport { user-zoom: zoom ; min-zoom: 100% ; max-zoom: 200% ; }*/
     </style>
 
-<link rel="stylesheet" href="css/app.css">
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-<link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
-<link rel="stylesheet" type="text/css" href="css/jquery.mobile.simpledialog.min.css" />       
-        
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"> </script>
-<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="js/jquery.mobile.simpledialog2.min.js"></script> 
-<script src="js/jquery.json.min.js"></script>
-    
-        
-    
-<script>
- (function($){
-        $(window).load(function(){
-            $(".content").mCustomScrollbar();
-        });
-    })(jQuery);
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile.simpledialog.min.css" />       
 
- </script>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"> </script>
+    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="js/jquery.mobile.simpledialog2.min.js"></script> 
+    <script src="js/jquery.json.min.js"></script>
     
+    <script>
+     (function($){
+            $(window).load(function(){
+                $(".content").mCustomScrollbar();
+            });
+        })(jQuery);
+
+     </script>
+
     <script src="js/app.js"></script>           <!-- for your event code, see README and file comments for details -->
     <script src="js/init-app.js"></script>      <!-- for your init code, see README and file comments for details -->
     <script src="xdk/init-dev.js"></script>     <!-- normalizes device and document ready events, see README for details -->
@@ -61,54 +59,53 @@
     <script>
             init_variables();
     </script>
-
-    
         
 </head>
 <body>
-<div data-role="page">
-    <div data-role="header" data-position="fixed" style="text-align:left" id="menubar">
-        <div data-role="navbar">
+    <div data-role="page">
+        <div data-role="header" data-position="fixed" style="text-align:left" id="menubar">
+            <div data-role="navbar">
+                <script>
+                createmenubar();
+                </script>
+            </div>
+        </div>
+
+        <div id="menuoptions">
             <script>
-            createmenubar();
+                createsettingsmenu();
+                cachesettingsmenu();
+
+                $("#courseslist" ).collapsible({
+                    expand: function(event, ui) { updatecourseslist(); }
+                    });    
+            </script>    
+        </div>             
+
+        <div id="reperesmenu">
+            <script>
+                createreperesmenu ();
+                cachereperesmenu ();
+            </script>
+        </div>
+
+        <div data-rol="content" id="wrappertable" class="mCustomScrollbar">        
+            <script>    
+                $(".content").mCustomScrollbar({axis:"x"});
+            </script>
+        </div>
+        <div id="keypad">
+            <script>
+            createkeypad();
+            cachekeypad();
             </script>
         </div>
     </div>
     
-    <div id="menuoptions">
-        <script>
-            createsettingsmenu();
-            cachesettingsmenu();
-            
-            $("#courseslist" ).collapsible({
-                expand: function(event, ui) { updatecourseslist(); }
-                });    
-        </script>    
-    </div>             
-    
-    <div id="reperesmenu">
-        <script>
-            createreperesmenu ();
-            cachereperesmenu ();
-        </script>
-    </div>
-    <div id="menumail">
+    <div data-role='page' data-dialog='true' id='pagemail'>
         <script>
             createdialogmail();
-            cachedialogmail();
-        </script>
+       </script>
     </div>
-    <div data-rol="content" id="wrappertable" class="mCustomScrollbar">        
-        <script>    
-            $(".content").mCustomScrollbar({axis:"x"});
-        </script>
-    </div>
-    <div id="keypad">
-        <script>
-        createkeypad();
-        cachekeypad();
-        </script>
-    </div>    
-</div>    
 </body>
 </html>

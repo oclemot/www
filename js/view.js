@@ -1,39 +1,37 @@
 function createdialogmail()
 { 
     var strtable="";
-    document.getElementById("menumail").innerHTML = "";
-
+//    document.getElementById("menumail").innerHTML = "";
+   
     
-    strtable+="Envoie les résultats...<br>";
-    strtable+="<form id='menumail2' style='text-align:left;margin-left=30px;margin-right=30px;vertical-align:center'>";
-
-    strtable+="<div class='ui-grid-a'>";
-    
-    strtable+="<div id='emailaddress'>";
-    
+    strtable+="<div data-role='header'>";
+    strtable+="     <h1>Envoi des résultats ...</h1>";
     strtable+="</div>";
+    strtable+="<div data-role='main' class='ui-content'>";
+    strtable+="     <form id='menumail2' style='text-align:left;margin-left=30px;margin-right=30px;vertical-align:center'>";
+    strtable+="         <div class='ui-grid-a'>";
+    strtable+="            <div id='emailaddress'>";
+    strtable+="            </div>";
+    strtable+="         </div>";
     
-    //strtable+="<div class='ui-block-a'style='width:30%'><label for='sub'>SUBJECT</label></div><div class='ui-block-b' style='width:70%'><input type='sub' name='sub' id='subject' /></div><br/>";
-
-    //strtable+="<div class='ui-block-a'style='width:30%'><label for='message'>MESSAGE:</label></div><div class='ui-block-b' style='width:70%'><textarea name='message' rows='5' cols='20' id='message'></textarea><br/></div>";
-    //strtable+="</div>";
-
-    strtable+="<div style='text-align:center'>";
-    strtable+="<a href='#' data-role='button' data-inline='true' onclick='cachedialogmail();' class='ui-link ui-btn ui-btn-inline ui-shadow ui-corner-all'>Cancel</a> ";
-    strtable+="<a href='#' data-role='button' data-inline='true' onclick='mail_send()'class='ui-link ui-btn ui-btn-inline ui-shadow ui-corner-all'>Send</a> ";
+    
+    strtable+="         <div style='text-align:center'>";
+    strtable+="                <a href='#' class='ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b' data-rel='back'>Cancel</a>";
+    strtable+="                <a href='#' class='ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b' data-rel='back' data-transition='flow' onclick='mail_send()'>Envoi</a>";
+    strtable+="         </div>";
+    strtable+="    </form>";
     strtable+="</div>";
-    strtable+="</form>";
-    document.getElementById("menumail").innerHTML = strtable;
+
+    
+    $('#pagemail').bind('pageshow', function(){
+            afficheformmail();
+            });
+    
+    document.getElementById("pagemail").innerHTML += strtable;
 }
 
-function cachedialogmail ()
-{
-    var mailform = document.getElementById("menumail");
-    mailform.zindex=-1;
-    mailform.style.display = "none";
-}
 
-function affichedialogmail()
+function afficheformmail()
 {
    var nn;
     var strtable="";
@@ -41,6 +39,7 @@ function affichedialogmail()
     var tmp;
     var nn;
     var mm;
+   
     for (nn=0; nn<nbjoueurs;nn++){
         strtable+="<div class='ui-block-a' style='width:30%'>";    
         strtable+="<label for='email"+nn+"'>";
@@ -49,15 +48,12 @@ function affichedialogmail()
         tdplayer=document.getElementById (tmp);
         strtable+=tdplayer.innerHTML;
         strtable+=":</label> </div>";
-        strtable+="<div class='ui-block-b' style='width:70%'>";
-        strtable+="<input type='email' name='email"+nn+"' id='email"+nn+"' /><br/>";
+        strtable+="<div class='ui-block-b' style='width:70%' >";
+        strtable+="<input type='email' name='email"+nn+"' id='email"+nn+"' size='12' /><br/>";
         strtable+="</div>";
     }
     var emailaddressdiv = document.getElementById("emailaddress");
     emailaddressdiv.innerHTML=strtable;
-    var mailform = document.getElementById("menumail");
-    mailform.zindex=1;
-    mailform.style.display = "block";
 }
 
 function createkeypad ()
@@ -247,8 +243,9 @@ function createsettingsmenu()
     stmpform+="<label for='flipHcp'>Hcp :</label> </div> <div class='ui-block-b'> <select name='flipHcp' id='flipHcp' data-role='slider'> <option value='on'>Oui</option> <option value='off'>Non</option> </select> </div> </div> </div>";
 
     stmpform+="<div style='text-align:center'>";
-    stmpform+="<a href='#' data-role='button' data-inline='true' onclick='cachesettingsmenu();' class='ui-link ui-btn ui-btn-inline ui-shadow ui-corner-all'>Cancel</a> ";
-    stmpform+="<a href='#' data-role='button' data-inline='true' onclick='updatesettings()'>Ok</a> ";
+    stmpform+="<a href='#' data-role='button' data-inline='true' onclick='cachesettingsmenu();' class='ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b'>Cancel</a> ";
+    stmpform+="<a href='#' data-role='button' data-inline='true' onclick='updatesettings()' class='ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b'>Ok</a> ";
+    
     stmpform+="</div>";
 
     stmpform+="</form>";
@@ -316,9 +313,9 @@ function createmenubar()
 {
     var strtmp="";
     strtmp+="<div data-role='controlgroup' data-type='horizontal'>";
-    strtmp+="<a href='#' class='ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-icon-right ui-icon-mail' onclick='affichedialogmail()'>Mail...</a>";
+    strtmp+="<a href='#pagemail' class='ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-icon-right ui-icon-mail'>Mail...</a>";
     strtmp+="<a href='#' id='simpleclearbutton' class='ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-icon-right ui-icon-delete' >Clear...</a>";
-strtmp+="<a href='#' class='ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-icon-right ui-icon-gear' onclick='affichesettingsmenu()'>Options...</a>";
+    strtmp+="<a href='#' class='ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-icon-right ui-icon-gear' onclick='affichesettingsmenu()'>Options...</a>";
     strtmp+="</div>";
 //src='images/eraser.png' style='width:24px;height:26px'
     document.getElementById("menubar").innerHTML = strtmp;   
@@ -356,10 +353,10 @@ function createtableandhandlers()
 {
     var tbody="";
     
-    tbody+="<table id='scorecard2mail' style='text-align:left;' border='1' cellpadding='2' cellspacing='2' background-repeat: no-repeat;'> <tbody> <tr id='joueurs' style='background-color: rgb(148, 193, 245);background-repeat: no-repeat;'>";
+    tbody+="<table id='scorecard2mail' style='text-align:center;' border='1' cellpadding='2' cellspacing='2'> <tbody> <tr id='joueurs' style='background-color: rgb(148, 193, 245);background-repeat: no-repeat;'>";
     
     tbody+="<td style='background-color: rgb(148, 193, 245);text-align:center' colspan='";
-    var nbcolonnesheader = 1+affichehcp+affichepar ;
+    var nbcolonnesheader = 1+affichehcp+affichepar;
     var tmpint=nbcolonnesheader+2*nbjoueurs; //nbcolonnestotal
     tbody+=tmpint;
     tbody+="'>";
@@ -500,7 +497,7 @@ function createtableandhandlers()
 
     document.getElementById("wrappertable").innerHTML = tbody;
     
-    cachekeypad();
+//    cachekeypad();
 }
 
 function affichescoresbrut (idhole)
