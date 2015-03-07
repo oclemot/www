@@ -103,8 +103,24 @@ function init_parcours(courseref){
                 var idj ;
                 for (idj=0;idj<4;idj++)
                 {
-                    joueursslope[idj]=slopeblanc;
-                    joueursSSS[idj]=SSSblanc;
+                    switch (joueursreperes[idj]) {
+                            case 1:
+                                joueursslope[idj]=slopeblanc;
+                                joueursSSS[idj]=SSSblanc;
+                            break;
+                            case 2:
+                                joueursslope[idj]=slopejaune;
+                                joueursSSS[idj]=SSSjaune;
+                            break;
+                            case 3:
+                                joueursslope[idj]=slopebleu;
+                                joueursSSS[idj]=SSSbleu;
+                            break;
+                            case 4:
+                                joueursslope[idj]=sloperouge;
+                                joueursSSS[idj]=SSSrouge;
+                            break;
+                    }
                 }
               }
           } 

@@ -555,32 +555,77 @@ function getpartiecache ()
     var urlJSON = "http://www.clemot.com/scorecard/www/php/cache/getcache.php?uuid=";
     urlJSON+=uuid;
        
+    var idx = 0;
+    
     $.getJSON(urlJSON, {format: "json"}, function(data){
         $.each(data, function(key, val) {        
-            alert (val);
-            
-            nbjoueurs = val.nbjoueurs;
-            gamemode = parseInt (val['gamemode']); 
-            b18T = gamemode = parseInt (val['b18T']);
-
-               for (zz=0; zz<18; zz++) {
-                    alert (val['coursepar'][1]);
-                    coursepar[zz]=parseInt(val['coursepar'][zz]);
-                    coursehcp[zz]=parseInt(val['coursehcp'][zz]);
-                }
-                for (i=1; i<22; i++){  
+            idx++;
+            switch (idx) {
+                    case 1: 
+                    uuid = val;
+                    break;
+                    case 2:
+                    for (i=1; i<22; i++){  
+                     for (j=0;j<4;j++){
+                        score[i][j]=parseInt(val[i][j]);
+                     }
+                    }
+                    break;
+                    case 3:
+                    for (i=1; i<22; i++){  
+                     for (j=0;j<4;j++){
+                        points[i][j]=parseInt(val[i][j]);
+                     }
+                    }
+                    break;
+                    case 4:
+                    nbjoueurs = val;
+                    break;
+                    case 5:
+                    coursename = val;
+                    break;
+                    case 6:
+                    for (i=0; i<18; i++) 
+                        coursepar [i] = val [i];
+                    break;
+                    case 7:
+                    for (i=0; i<18; i++) 
+                        coursehcp [i] = val [i];
+                    break;
+                    case 8:
+                    for (i=1; i<22; i++){  
+                     for (j=0;j<4;j++){
+                        coupsrecus[i][j]=val[i][j];
+                     }
+                    }
+                    break;
+                    case 9:
                     for (j=0;j<4;j++){
-                        score[j]=parseInt(val['score0'][i][j]);
-                        points[i][j]=parseInt(val['points0'][i][j]);
-                        coupsrecus[i][j]=parseInt(val['coupsrecus'][i][j]);
-                        joueursindex[j]=parseInt(val['joueursindex'][j]);
-                        joueursreperes[j]=parseInt(val['joueursreperes'][j]);
-                        joueursname[j]=parseInt(val['joueursname'][j]);
-                        }
-                }
-                courseindex=val['courseindex'];
-                init_parcours (courseindex);
+                        joueursindex[j]=val[j];
+                    }
+                    break;
+                    case 10:
+                    for (j=0;j<4;j++){
+                        joueursreperes[j]=val[j];
+                    }
+                    break;
+                    case 11:
+                    for (j=0;j<4;j++){
+                        joueursname[j]=val[j];
+                    }
+                    break;
+                    case 12:
+                    b18T=val;
+                    break;
+                    case 13:
+                    gamemode=val;
+                    break;
+                    case 13:
+                    courseindex=val;
+                    break;
+            }
             } 
         );
     });   
+    init_parcours (courseindex);
 }
