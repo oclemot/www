@@ -20,7 +20,7 @@
         var xblink;
         var xcallback;
         var currbg;
-        var flag;
+        var flagblink;
         var courseindex;
         var coursename ="";
         var coursepartotal;
@@ -28,6 +28,7 @@
         var affichepar = 1;
         var affichehcp = 1;
         var cellreperid;
+        var uuid;
 
 
 
@@ -40,8 +41,9 @@ function init_variables ()
     gamemode = 1; //chouette
     b18T =18;
     currentcell="";
+    uuid = "1234";
 
-    for (i=1; i<22; i++){  
+    for (i=0; i<22; i++){  
         score[i]=new Array();
         points[i]=new Array();
         coupsrecus[i]=new Array();
@@ -56,7 +58,7 @@ function init_variables ()
         }
     }
     
-    flag = 1;
+    flagblink = 1;
     courseindex=1;
     init_parcours (courseindex);
 }
@@ -109,5 +111,3 @@ function init_parcours(courseref){
         );
     });    
 }
-
-

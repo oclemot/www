@@ -193,20 +193,16 @@ function addInputText(elm)
 }
 
 function blinkcell (cel) {
-    //alert ("flag ="+flag);
-    // alert ("currentcell= "+currentcell);
     
     var td = document.getElementById(cel);
-    if (flag==1){
+    if (flagblink==1){
 
         td.style.backgroundColor="red";   
-        flag = 0;
-        // alert ("flag= "+ flag);
+        flaglink = 0;
     }
     else {
-        //alert ("false");
         td.style.backgroundColor=currbg;
-        flag = 1;
+        flagblink = 1;
     }
 }
 
@@ -252,7 +248,6 @@ function clearscorecard ()
     effacejoueurs ();
     videscorecard();
 }
-                        
 
 
 function addkey(key, idobject){    
@@ -407,11 +402,8 @@ function updatesettings ()
 }
 
 
-function mail_send () {
-   
-    
+function mail_send () {    
     var tdiv = document.getElementById("scorecard2mail");
-    
     var tablehtml ="";// tdiv.innerHTML;
    
        // tablehtml+=json = array2json(score)
@@ -432,8 +424,7 @@ function mail_send () {
     //pointsmail.shift();
   
     
-    var input_data ={
-        
+    var input_data ={    
         'score0' : scoremail,
         'points0' : pointsmail,
         'nbjoueurs' : nbjoueurs, 
@@ -450,11 +441,7 @@ function mail_send () {
         'b18T' : b18T
     }
     input_data = $.toJSON(input_data);
-    
-    
- // alert (input_data);
-    
-    
+        
     $.ajax({
     type: "GET",
     url: "http://www.clemot.com/scorecard/www/php/mail.php",
@@ -501,3 +488,99 @@ function setrepere (idrepere)
     cachereperesmenu ();
 }
 
+function onload()
+{
+$('<div>').simpledialog2({
+    mode: 'button',
+    headerText: 'nouvelle partie ?',
+    headerClose: true,
+    buttonPrompt: 'Retrouver partie en cache ?',
+      forceinput: true,
+      left : true,
+      themeDialog: 'a',
+    buttons : {
+          'Oui': {
+            click: function () { 
+              getpartiecache ();
+            }
+          },
+          'Non': {
+            click: function () { 
+              //alert ("rien");
+            },
+            icon: "delete",
+            theme: "d",
+            }
+        }
+    });    
+    var cachehandler = setInterval("setcache()", 30000);
+}
+
+function setcache () {    
+    var scoremail = [];
+    var pointsmail = [];
+
+    scoremail = score;
+    pointsmail = points;
+       
+    var input_data ={
+        'uuid' : uuid,
+        'score0' : scoremail,
+        'points0' : pointsmail,
+        'nbjoueurs' : nbjoueurs, 
+        'coursename' : coursename,
+        'coursepar' : coursepar,
+        'coursehcp' : coursehcp,
+        'coupsrecus' : coupsrecus,
+        'joueursindex' : joueursindex,
+        'joueursreperes' : joueursreperes,
+        'joueursname' : joueursname,
+        'b18T' : b18T,
+        'gamemode' : gamemode,
+        'courseindex' : courseindex
+    }
+    input_data = $.toJSON(input_data);
+    alert ("setcache");
+
+    
+    $.ajax({
+    type: "GET",
+    url: "http://www.clemot.com/scorecard/www/php/cache/setcache.php",
+    data: "pTableData=" + input_data,
+    });     
+    }
+
+function getpartiecache ()
+{
+    var urlJSON = "http://www.clemot.com/scorecard/www/php/cache/getcache.php?uuid=";
+    urlJSON+=uuid;
+       
+    $.getJSON(urlJSON, {format: "json"}, function(data){
+        $.each(data, function(key, val) {        
+            alert (val);
+            
+            nbjoueurs = val.nbjoueurs;
+            gamemode = parseInt (val['gamemode']); 
+            b18T = gamemode = parseInt (val['b18T']);
+
+               for (zz=0; zz<18; zz++) {
+                    alert (val['coursepar'][1]);
+                    coursepar[zz]=parseInt(val['coursepar'][zz]);
+                    coursehcp[zz]=parseInt(val['coursehcp'][zz]);
+                }
+                for (i=1; i<22; i++){  
+                    for (j=0;j<4;j++){
+                        score[j]=parseInt(val['score0'][i][j]);
+                        points[i][j]=parseInt(val['points0'][i][j]);
+                        coupsrecus[i][j]=parseInt(val['coupsrecus'][i][j]);
+                        joueursindex[j]=parseInt(val['joueursindex'][j]);
+                        joueursreperes[j]=parseInt(val['joueursreperes'][j]);
+                        joueursname[j]=parseInt(val['joueursname'][j]);
+                        }
+                }
+                courseindex=val['courseindex'];
+                init_parcours (courseindex);
+            } 
+        );
+    });   
+}
