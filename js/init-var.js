@@ -32,10 +32,9 @@
         var event;
 
 
-
-
 function onDeviceReady() {
         uuid = device.uuid;
+        getpartiecache ();
 //        alert (uuid);
 }
 

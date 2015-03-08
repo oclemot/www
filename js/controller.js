@@ -222,7 +222,6 @@ function addInputNumber(elm, idmode)
         currbg = tmp.style.backgroundColor;
 
         xblink = setInterval("blinkcell(currentcell)", 200);
-
         affichekeypad(idmode);
     }
 }
@@ -449,31 +448,36 @@ function setrepere (idrepere)
 
 function onload()
 {
-$('<div>').simpledialog2({
-    mode: 'button',
-    headerText: 'nouvelle partie ?',
-    headerClose: true,
-    buttonPrompt: 'Récupérer dernière partie ?',
-      forceinput: true,
-      left : true,
-      themeDialog: 'a',
-    buttons : {
-          'Oui': {
-            click: function () { 
-              getpartiecache ();
+    if (0)
+    { $('<div>').simpledialog2({
+        mode: 'button',
+        headerText: 'nouvelle partie ?',
+        headerClose: true,
+        buttonPrompt: 'Récupérer dernière partie ?',
+          forceinput: true,
+          left : true,
+          themeDialog: 'a',
+        buttons : {
+              'Oui': {
+                click: function () { 
+                  getpartiecache ();
+                }
+              },
+              'Non': {
+                click: function () { 
+                  //alert ("rien");
+                },
+                icon: "delete",
+                theme: "d",
+                }
             }
-          },
-          'Non': {
-            click: function () { 
-              //alert ("rien");
-            },
-            icon: "delete",
-            theme: "d",
-            }
-        }
-    });
-    alert ("set cache handler");
-    cachehandler = setInterval("setcache()", 30000);
+        });
+    }
+//    alert ("get cache");
+//     getpartiecache ();
+//    alert ("apres cache");
+
+     cachehandler = setInterval("setcache()", 30000);
 }
 
 function setcache () {    
@@ -501,21 +505,17 @@ function setcache () {
     }
     input_data = $.toJSON(input_data);
     
-    alert ("avant ajax set code "+uuid);
-    
     $.ajax({
     type: "GET",
     url: "http://www.clemot.com/scorecard/www/php/cache/setcache.php",
     data: "pTableData=" + input_data,
     });     
-    alert ("ajax done");
 }
 
 function getpartiecache ()
 {
     var urlJSON = "http://www.clemot.com/scorecard/www/php/cache/getcache.php?uuid=";
     urlJSON+=uuid;
-       
     var idx = 0;
     $.getJSON(urlJSON, {format: "json"}, function(data){
         $.each(data, function(key, val) {        
