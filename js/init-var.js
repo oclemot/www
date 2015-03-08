@@ -36,7 +36,7 @@
 
 function onDeviceReady() {
         uuid = device.uuid;
-        alert (uuid);
+//        alert (uuid);
 }
 
 // init variables

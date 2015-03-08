@@ -471,7 +471,8 @@ $('<div>').simpledialog2({
             theme: "d",
             }
         }
-    });    
+    });
+    alert ("set cache handler");
     cachehandler = setInterval("setcache()", 30000);
 }
 
