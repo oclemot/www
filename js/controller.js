@@ -15,7 +15,10 @@ function closeInput(elm) {
 
 function calculecoupsrecus ()
 {
-//alert ("coups recus");
+//    alert (joueursslope[0]);
+//    alert (joueursSSS[0]);
+    
+    
     var rescoups = 0;
     var rescoupsmodulo = 0;
     
@@ -56,7 +59,7 @@ function calculecoupsrecus ()
         //alert ("cr ij "+i+" "+j+ " "+coupsrecus[20][j]);
         //alert (coupsrecus[19][j]);
         coupsrecus[21][j]=coupsrecus[19][j]+coupsrecus[20][j];
-    //alert (coupsrecus[21][j]);
+ //   alert (coupsrecus[21][j]);
     }
 }
 
@@ -166,13 +169,9 @@ if (gamemode===1){
 
         }
     }
-    //alert ("3");
     calculetotaux();
-    //alert ("4");
     affichescoresnet(idhole);
-    //alert ("5");
     affichetotaux ();
-    //alert ("fin");
 }
 
     
@@ -225,17 +224,16 @@ function addInputNumber(elm, idmode)
         xblink = setInterval("blinkcell(currentcell)", 200);
 
         affichekeypad(idmode);
-
-        //alert (keypadobject.style.display);
     }
 }
 
 
 function clearscorecard ()
 {
+    sauvepartie ();
+    
      for (i=1; i<22; i++){  
                 for (j=0;j<4;j++){
-    //                alert (i+" "+j);
                     score[i][j]=0;
                     points[i][j]=0;
                 }
@@ -334,13 +332,13 @@ function updatesettings ()
         b18T=18;
     };
     
-    if ($("#flipPar").val()=='on')
-    {
-        affichepar =1;   
-    }
-    else {
-        affichepar =0;
-    }
+//    if ($("#flipPar").val()=='on')
+//    {
+//        affichepar =1;   
+//    }
+//    else {
+//        affichepar =0;
+//    }
 
     if ($("#flipHcp").val()=='on')
     {
@@ -362,10 +360,6 @@ function updatesettings ()
         gamemode=1;
     };
     
-  // alert(gamemode);
-    
-    //set parcours
-    
     cachesettingsmenu ();  
     calculecoupsrecus ();
     
@@ -380,13 +374,7 @@ function mail_send () {
     var tdiv = document.getElementById("scorecard2mail");
     var tablehtml ="";// tdiv.innerHTML;
    
-       // tablehtml+=json = array2json(score)
-   
-//    alert ("mail");
-    
     var tmpstr = $('#menumail2').serialize();
-    //alert (tmpstr);
-    //input_data+=table;
     
     var scoremail = [];
     var pointsmail = [];
@@ -394,9 +382,6 @@ function mail_send () {
     scoremail = score;
     pointsmail = points;
     
-    //scoremail.shift();
-    //pointsmail.shift();
-  
     
     var input_data ={    
         'score0' : scoremail,
@@ -468,7 +453,7 @@ $('<div>').simpledialog2({
     mode: 'button',
     headerText: 'nouvelle partie ?',
     headerClose: true,
-    buttonPrompt: 'Retrouver partie en cache ?',
+    buttonPrompt: 'Récupérer dernière partie ?',
       forceinput: true,
       left : true,
       themeDialog: 'a',
@@ -520,7 +505,7 @@ function setcache () {
     url: "http://www.clemot.com/scorecard/www/php/cache/setcache.php",
     data: "pTableData=" + input_data,
     });     
-    }
+}
 
 function getpartiecache ()
 {
@@ -531,6 +516,7 @@ function getpartiecache ()
     $.getJSON(urlJSON, {format: "json"}, function(data){
         $.each(data, function(key, val) {        
             idx++;
+          //  alert (idx);
             switch (idx) {
                     case 1: 
                     uuid = val;
@@ -601,4 +587,36 @@ function getpartiecache ()
 
     });   
     
+}
+
+function sauvepartie () {    
+    var scoremail = [];
+    var pointsmail = [];
+    
+    scoremail = score;
+    pointsmail = points;
+    
+    var input_data ={
+        'uuid' : uuid,
+        'score0' : scoremail,
+        'points0' : pointsmail,
+        'nbjoueurs' : nbjoueurs, 
+        'coursename' : coursename,
+        'coursepar' : coursepar,
+        'coursehcp' : coursehcp,
+        'coupsrecus' : coupsrecus,
+        'joueursindex' : joueursindex,
+        'joueursreperes' : joueursreperes,
+        'joueursname' : joueursname,
+        'b18T' : b18T,
+        'gamemode' : gamemode,
+        'courseindex' : courseindex
+    }
+    input_data = $.toJSON(input_data);
+    
+    $.ajax({
+    type: "GET",
+    url: "http://www.clemot.com/scorecard/www/php/cache/sauvepartie.php",
+    data: "pTableData=" + input_data,
+    });     
 }

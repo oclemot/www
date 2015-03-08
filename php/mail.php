@@ -24,6 +24,14 @@
 	$nbjoueurs = intval($tableData["nbjoueurs"]);
 	
 	$tmpint=intval (3 +2*$nbjoueurs);
+	$tmpparOut =0;
+	$tmpparIn = 0;
+	$tmppar = 0;
+	
+	for ($i=0; $i<9;$i++) $tmpparOut+=$tableData["coursepar"][$i];
+	for ($i=9; $i<18;$i++) $tmpparIn+=$tableData["coursepar"][$i];
+	$tmppar = $tmpparIn+$tmpparOut;
+		
 		
 	$message.=strval($tmpint);
     $message.="\">". "\r\n";
@@ -88,17 +96,18 @@
     
     $tmpid="";
     
-    for ($i=1;$i<10;$i++){ 
+    for ($i=0;$i<9;$i++){ 
 		$message.="<tr> "; 
 		$message.=" <td> " ;
 		$message.=strval($i);
 		$message.=" </td> ";
 		$message.=" <td> ";
-		$message.=strval ($tableData["coursepar"][$i]);
-		$message.=" </td> ". "\r\n";
-		$message.=" <td> ";
 		$message.=strval ($tableData["coursehcp"][$i]);
 		$message.=" </td> ". "\r\n";
+		$message.=" <td> ";
+		$message.=strval ($tableData["coursepar"][$i]);
+		$message.=" </td> ". "\r\n";
+
 
 		for ($j=1;$j<=$nbjoueurs;$j++){
           $message.= " <td> ";
@@ -115,7 +124,7 @@
     
     if (intval($tableData["b18T"])==18){
     //if (true) {
-        $message.="<tr style =\"background-color:#8bed73\" ><td colspan=\"3\">Out</td>";
+        $message.="<tr style =\"background-color:#8bed73\" ><td colspan=\"2\">Out</td> <td>" . $tmpparOut . "</td>";
       
 //Ligne OUT        
         
@@ -131,17 +140,17 @@
 
 //Lignes TROUS 10-18        
         
-       for ($i=10;$i<19;$i++){ 
+       for ($i=9;$i<18;$i++){ 
 			$message.="<tr>"; 
 			$message.="<td>";
 			$message.=strval($i);
 			$message.="</td>";
-			$message.=" <td>";
-			$message.=strval ($tableData["coursepar"][$i]);
-			$message.=" </td>";
 			$message.=" <td> ";
 			$message.=strval($tableData["coursehcp"][$i]);
 			$message.=" </td>". "\r\n";
+			$message.=" <td>";
+			$message.=strval ($tableData["coursepar"][$i]);
+			$message.=" </td>";
 			for ($j=1;$j<=$nbjoueurs;$j++){
 		      $message.= " <td>";
 			  $message.= strval ($tableData["score0"][$i][$j-1]);
@@ -153,7 +162,7 @@
 			$message.=" </tr> "; 
 		}
 		$message.=" <tr style=\"background-color:#8bed73\">";
-		$message.=" <td colspan=\"3\"> In </td> " . "\r\n";
+		$message.=" <td colspan=\"2\"> In </td> <td> " . $tmpparIn . "</td>"  . "\r\n";
 
 //Ligne IN
         
@@ -167,7 +176,7 @@
 		$message.=" </tr> ";
 		
 		$message.=" <tr style=\"background-color:#8bed73\"  >";
-		$message.=" <td colspan=\"3\"> Out </td> " . "\r\n";
+		$message.=" <td colspan=\"2\"> Out </td> <td> " . $tmpparOut . "</td>" . "\r\n";
 	
         //LIgnes OUT (répétée)
 		for ($i=1;$i<=$nbjoueurs;$i++){
@@ -185,7 +194,7 @@
     
 //LIGNE TOTAL    
     
-        $message.="<tr style=\"background-color:#8bed73\" > <td colspan=\"3\" >Total</td> ";
+        $message.="<tr style=\"background-color:#8bed73\" > <td colspan=\"2\" >Total</td> <td> " .$tmppar . "</td> ";
         for ($i=1;$i<=$nbjoueurs;$i++){
 			$message.=" <td> ";
 			$message.= strval ($tableData["score0"][21][$i-1]);

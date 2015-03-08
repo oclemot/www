@@ -236,8 +236,8 @@ function createsettingsmenu()
 
     stmpform+="<div class='ui-grid-a'>";
 
-    stmpform+="<div class='ui-block-a'>";    
-    stmpform+="<label for='flipPar'>Par :</label> </div> <div class='ui-block-b'> <select name='flipPar' id='flipPar' data-role='slider'> <option value='on'>Oui</option> <option value='off'>Non</option>  </select> </div>";
+//    stmpform+="<div class='ui-block-a'>";    
+//    stmpform+="<label for='flipPar'>Par :</label> </div> <div class='ui-block-b'> <select name='flipPar' id='flipPar' data-role='slider'> <option value='on'>Oui</option> <option value='off'>Non</option>  </select> </div>";
 
     stmpform+="<div class='ui-block-a'>";    
     stmpform+="<label for='flipHcp'>Hcp :</label> </div> <div class='ui-block-b'> <select name='flipHcp' id='flipHcp' data-role='slider'> <option value='on'>Oui</option> <option value='off'>Non</option> </select> </div> </div> </div>";
@@ -348,15 +348,17 @@ function createmenubar()
 })
 }
 
-function createtableandhandlers()
 
+function createtableandhandlers()
 {
     var tbody="";
+    var parOut =0;
+    var parIn =0;
     
     tbody+="<table id='scorecard2mail' style='text-align:center;' border='1' cellpadding='2' cellspacing='2'> <tbody> <tr id='joueurs' style='background-color: rgb(148, 193, 245);background-repeat: no-repeat;'>";
     
     tbody+="<td style='background-color: rgb(148, 193, 245);text-align:center' colspan='";
-    var nbcolonnesheader = 1+affichehcp+affichepar;
+    var nbcolonnesheader =1+ affichehcp+affichepar;
     var tmpint=nbcolonnesheader+2*nbjoueurs; //nbcolonnestotal
     tbody+=tmpint;
     tbody+="'>";
@@ -375,6 +377,7 @@ function createtableandhandlers()
     }
     
     tbody+="</tr><tr style='background-color: rgb(148, 193, 245);text-align:center'> <td colspan='";
+    
     tbody+=nbcolonnesheader;
     tbody+="' style='width:20px;'>Index/Départ</td>";      
     
@@ -388,12 +391,15 @@ function createtableandhandlers()
     }
     
     tbody+="</tr> <tr style='background-color: rgb(216, 216, 216);'><td>#</td>";
-    if (affichepar){
-        tbody+="<td>Par</td>";
-    }
+    
     if (affichehcp) {
         tbody+="<td>Hcp</td>";
     }
+    
+    if (affichepar){
+        tbody+="<td>Par</td>";
+    }
+    
 
     for (i=1; i<=parseInt(nbjoueurs); i++) { 
         tbody+="<td style='width:40px;'>Brut</td> <td style='width: 40px; '>Net</td>";
@@ -410,8 +416,8 @@ function createtableandhandlers()
       tmpid = "H" +i;
       //alert ("tmpid=" + tmpid);
       tbody+="<td id="+ tmpid + " style='width:20px; text-align:center;'>"+ i + " </td>";
-      if (affichepar) tbody+="<td id="+ tmpid + " style='width:20px; text-align:center;'>"+ coursepar[i-1] + " </td>";
       if (affichehcp) tbody+="<td id="+ tmpid + " style='width:20px; text-align:center;'>"+ coursehcp[i-1] + " </td>";
+      if (affichepar) tbody+="<td id="+ tmpid + " style='width:20px; text-align:center;'>"+ coursepar[i-1] + " </td>";
   
 
       for (j=1;j<=parseInt(nbjoueurs);j++) { 
@@ -424,14 +430,19 @@ function createtableandhandlers()
         }
       }
     
+    for (i=0; i<9;i++) parOut+= coursepar[i];
+        
     
 //Suite uniquement si 18 trous    
     
     if (b18T===18)
     {
         tbody+="<tr style ='background-color: rgb(139, 237, 115)';background-repeat: no-repeat;><td style='text-align:center' colspan='";
-        tbody+=nbcolonnesheader;
+        tmpint=nbcolonnesheader-1;
+        tbody+=tmpint;
         tbody+="'>Out</td>";
+        
+        tbody+="<td>" + parOut+ "</td>";
       
 //Ligne OUT        
         
@@ -444,23 +455,28 @@ function createtableandhandlers()
 //Lignes TROUS 10-18        
         
        for (i=10;i<19;i++){ 
-              tbody+="<tr>"; 
-              tmpid = "H"+ i ;
-              tbody+="<td id='"+ tmpid + "'  style='width: 20px;'>"+ i + " </td>";
-              if (affichepar) tbody+="<td id="+ tmpid + " style='width:20px; text-align:center;'>"+ coursepar[i-1] + " </td>";
-              if (affichehcp) tbody+="<td id="+ tmpid + " style='width:20px; text-align:center;'>"+ coursehcp[i-1] + " </td>";
+          tbody+="<tr>"; 
+          tmpid = "H"+ i ;
+          tbody+="<td id='"+ tmpid + "'  style='width: 20px;'>"+ i + " </td>";
+          if (affichehcp) tbody+="<td id="+ tmpid + " style='width:20px; text-align:center;'>"+ coursehcp[i-1] + " </td>";
+          if (affichepar) tbody+="<td id="+ tmpid + " style='width:20px; text-align:center;'>"+ coursepar[i-1] + " </td>";
 
-              for (j=1;j<=parseInt(nbjoueurs);j++){
-                  tmpid ="H"+ i + "P" + j;
-                  tbody+="<td id='"+ tmpid +"' onclick = 'addInputNumber(this,1)' style='width: 40px; background-repeat: no-repeat;text-align:center;'></td>";
-                  tmpid ="H"+ i + "P" + j + "net";
-                  tbody+="<td id='" +tmpid +"' style='width: 40px; background-color: rgb(216, 216, 216);text-align:center;'></td>";
-              }
-          }
 
-            tbody+="<tr style ='background-color: rgb(139, 237, 115);background-repeat: no-repeat;text-align:center;';><td style='text-align:center' colspan='";
-        tbody+=nbcolonnesheader;
+          for (j=1;j<=parseInt(nbjoueurs);j++){
+              tmpid ="H"+ i + "P" + j;
+              tbody+="<td id='"+ tmpid +"' onclick = 'addInputNumber(this,1)' style='width: 40px; background-repeat: no-repeat;text-align:center;'></td>";
+              tmpid ="H"+ i + "P" + j + "net";
+              tbody+="<td id='" +tmpid +"' style='width: 40px; background-color: rgb(216, 216, 216);text-align:center;'></td>";
+            }
+        }
+
+        tbody+="<tr style ='background-color: rgb(139, 237, 115);background-repeat: no-repeat;text-align:center;';><td style='text-align:center' colspan='";
+        tmpint=nbcolonnesheader-1;
+        tbody+=tmpint;
         tbody+="'>In</td>";
+        
+        for (i=9; i<18;i++) parIn+= coursepar[i];
+        tbody+="<td>" + parIn+ "</td>";
 
 
 //Ligne IN
@@ -469,10 +485,13 @@ function createtableandhandlers()
                 tbody+="<td id='IN" +i +"' style='background-repeat: no-repeat;'></td> <td id='IN"+ i + "net' style='background-repeat: no-repeat;text-align:center;'></td>";
             }       
 
-            tbody+="</tr>";
-            tbody+="<tr style ='background-color: rgb(139, 237, 115)';background-repeat: no-repeat;text-align:center;'><td style='text-align:center' colspan='";
-        tbody+=nbcolonnesheader;
+        tbody+="</tr>";
+        tbody+="<tr style ='background-color: rgb(139, 237, 115)';background-repeat: no-repeat;text-align:center;'><td style='text-align:center' colspan='";
+        tmpint=nbcolonnesheader-1;
+        tbody+=tmpint;
         tbody+="'>Out</td>";
+        
+        tbody+="<td>" + parOut+ "</td>";
         
         //LIgnes OUT (répétée)
             for (i=1;i<=parseInt(nbjoueurs);i++) {
@@ -486,9 +505,11 @@ function createtableandhandlers()
 //LIGNE TOTAL    
     
         tbody+="<tr style ='background-color:rgb(139, 237, 115); background-repeat: no-repeat';><td style='text-align:center' colspan='";
-        tbody+=nbcolonnesheader;
-    //alert(nbcolonnesheader);
-        tbody+="'>Total</td>";
+        tmpint=nbcolonnesheader-1;
+        tbody+=tmpint;//alert(nbcolonnesheader);
+        tbody+="'>Total</td> <td>";
+        var tmppar=parIn+parOut;
+        tbody+=tmppar + "</td>";
         for (i=1;i<=parseInt(nbjoueurs);i++) {
                   tbody+="<td id='Score" +i +"' style ='background-repeat: no-repeat;text-align:center;'></td> <td id='Score"+ i + "net' style ='background-repeat: no-repeat;text-align:center;'></td>";
      }
@@ -496,8 +517,6 @@ function createtableandhandlers()
     tbody+="</tbody></table>";        
 
     document.getElementById("wrappertable").innerHTML = tbody;
-    
-//    cachekeypad();
 }
 
 function affichescoresbrut (idhole)
