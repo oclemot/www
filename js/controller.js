@@ -472,7 +472,7 @@ $('<div>').simpledialog2({
             }
         }
     });    
-    var cachehandler = setInterval("setcache()", 30000);
+    cachehandler = setInterval("setcache()", 30000);
 }
 
 function setcache () {    
@@ -500,11 +500,14 @@ function setcache () {
     }
     input_data = $.toJSON(input_data);
     
+    alert ("avant ajax set code "+uuid);
+    
     $.ajax({
     type: "GET",
     url: "http://www.clemot.com/scorecard/www/php/cache/setcache.php",
     data: "pTableData=" + input_data,
     });     
+    alert ("ajax done");
 }
 
 function getpartiecache ()

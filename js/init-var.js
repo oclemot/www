@@ -17,6 +17,7 @@
         var i,j;
         var currentcell;
         var xblink;
+        var cachehandler;
         var xcallback;
         var currbg;
         var flagblink;
@@ -34,8 +35,8 @@
 
 
 function onDeviceReady() {
-        alert ("device ready");
         uuid = device.uuid;
+        alert (uuid);
 }
 
 // init variables
