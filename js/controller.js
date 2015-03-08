@@ -369,36 +369,10 @@ function updatesettings ()
     cachesettingsmenu ();  
     calculecoupsrecus ();
     
-    //re-affiche
-    createtableandhandlers ();
- 
-    
-    var txx;
-  //re-calcule
-    for (txx=1;txx<=parseInt(b18T);txx++){
-        //alert ("18t " + b18T);
-        //alert (txx);
-        calculepointsnet(txx);
-    }
-    //alert ("2");
-    
-    for (tt=1;tt<=b18T;tt++){
-//        alert (tt);
-        affichescoresbrut(tt);
-        affichescoresnet(tt);
-    }
-    
-    calculetotaux();
-    
-    if (gamemode==2) {
-        //alert ("affiche coups recus");
-        affichecoupsrecus ();
-     }
- //   alert("1");
-    afficheindex ();
-    affichereperes ();
-    //alert ("2");
-    affichetotaux ();
+
+    // Dispatch the event.
+    event = new Event('dataready');
+    document.dispatchEvent(event);
 }
 
 
@@ -519,10 +493,10 @@ $('<div>').simpledialog2({
 function setcache () {    
     var scoremail = [];
     var pointsmail = [];
-
+    
     scoremail = score;
     pointsmail = points;
-       
+    
     var input_data ={
         'uuid' : uuid,
         'score0' : scoremail,
@@ -540,8 +514,6 @@ function setcache () {
         'courseindex' : courseindex
     }
     input_data = $.toJSON(input_data);
-    alert ("setcache");
-
     
     $.ajax({
     type: "GET",
@@ -556,7 +528,6 @@ function getpartiecache ()
     urlJSON+=uuid;
        
     var idx = 0;
-    
     $.getJSON(urlJSON, {format: "json"}, function(data){
         $.each(data, function(key, val) {        
             idx++;
@@ -623,9 +594,11 @@ function getpartiecache ()
                     case 13:
                     courseindex=val;
                     break;
+                }
             }
-            } 
         );
+        init_parcours (courseindex);
+
     });   
-    init_parcours (courseindex);
+    
 }

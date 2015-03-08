@@ -537,7 +537,6 @@ function affichescoresnet (idhole)
 
 function affichetotaux()
 {
-//alert ("affichetotaux");
     var jz;    
     var xtmp=0;
     var xstrtmp="";
@@ -875,4 +874,27 @@ var tmpid;
             tt.innerHTML="";
             }
     }
+}
+
+function affichetout ()
+{
+    createtableandhandlers ();
+    var txx;
+    for (txx=1;txx<=parseInt(b18T);txx++){
+        calculepointsnet(txx);
+    }
+    for (tt=1;tt<=b18T;tt++){
+        affichescoresbrut(tt);
+        affichescoresnet(tt);
+    }
+
+    calculetotaux();
+
+    if (gamemode==2) {
+        affichecoupsrecus ();
+    }
+
+    afficheindex ();
+    affichereperes ();
+    affichetotaux ();
 }

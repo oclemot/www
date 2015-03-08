@@ -1,4 +1,3 @@
-
     //global variables
 
         var coursepar = [];
@@ -29,10 +28,14 @@
         var affichehcp = 1;
         var cellreperid;
         var uuid;
+        var event;
 
 
 
 
+function onDeviceReady() {
+        uuid = device.uuid;
+}
 
 // init variables
 function init_variables ()
@@ -41,7 +44,11 @@ function init_variables ()
     gamemode = 1; //chouette
     b18T =18;
     currentcell="";
-    uuid = "1234";
+    
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+    document.addEventListener("dataready", affichetout, false);
 
     for (i=0; i<22; i++){  
         score[i]=new Array();
@@ -99,7 +106,6 @@ function init_parcours(courseref){
                 coursename=val['name'];
                 coursepartotal=val['par'];
                 $('#defaultcourse').html (coursename + " par: "+ coursepartotal);   
-                createtableandhandlers();
                 var idj ;
                 for (idj=0;idj<4;idj++)
                 {
@@ -121,9 +127,13 @@ function init_parcours(courseref){
                                 joueursSSS[idj]=SSSrouge;
                             break;
                     }
-                }
+                };
+                
+                  // Dispatch the event.
+                event = new Event('dataready');
+                document.dispatchEvent(event);
               }
           } 
         );
-    });    
+    });
 }

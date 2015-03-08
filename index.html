@@ -1,12 +1,7 @@
 <!DOCTYPE html>
+
 <html>
-<!--
 
-<html manifest="appcache.manifest">
-
-
-* Please see the included README.md file for license terms and conditions.
-  ---->
 <head>
 <title>La chouette c'est chouette !</title>
     
@@ -56,13 +51,15 @@
     <script src="intelxdk.js"></script>         <!-- phantom library, needed for XDK api calls -->
     <script src="cordova.js"></script>          <!-- phantom library, needed for Cordova api calls -->
     <script src="xhr.js"></script>              <!-- phantom library, needed for XDK CORS -->
-    <script>
+    
+<script>
             init_variables();
-    </script>
+</script>    
         
 </head>
-<body>
-    <div data-role="page">
+<body onload="onload()">
+    
+    <div data-role="page">        
         <div data-role="header" data-position="fixed" style="text-align:left" id="menubar">
             <div data-role="navbar">
                 <script>
