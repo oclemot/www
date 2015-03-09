@@ -897,6 +897,10 @@ var tmpid;
 
 function affichetout ()
 {
+    //alert ("affiche tout");
+    
+    setcache ();
+    
     createtableandhandlers ();
     var txx;
     for (txx=1;txx<=parseInt(b18T);txx++){

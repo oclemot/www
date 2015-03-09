@@ -32,12 +32,6 @@
         var event;
 
 
-function onDeviceReady() {
-        uuid = device.uuid;
-        getpartiecache ();
-//        alert (uuid);
-}
-
 // init variables
 function init_variables ()
 {
@@ -68,7 +62,7 @@ function init_variables ()
     
     flagblink = 1;
     courseindex=1;
-    init_parcours (courseindex);
+//    init_parcours (courseindex);
 }
 
 

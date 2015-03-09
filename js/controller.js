@@ -1,4 +1,22 @@
 //Fonctions generales
+
+function onDeviceReady() {
+        uuid = device.uuid;
+        var networkState = navigator.connection.type;
+        if (networkState.type==Connection.NONE){
+            $('<div>').simpledialog2({
+                mode: 'blank',
+                headerText: 'Problème de réseau !',
+                headerClose: true,
+                blankContent : "<a rel='close' data-role='button' href='#'>Fonctionnalités limitées</a>"
+            });
+        }
+        getpartiecache ();
+//      alert (uuid);
+    
+}
+
+
         
 function closeInput(elm) {
     var td = elm.parentNode;
@@ -294,6 +312,8 @@ function addkey(key, idobject){
                 affichetotaux ();
             }
             scoreallowed=true;
+			event = new Event('dataready');
+            document.dispatchEvent(event);
             return;
         }
         td.innerHTML+=key;
@@ -318,6 +338,8 @@ function addkey(key, idobject){
         clearInterval(xblink);
         td.style.backgroundColor=currbg;
     }
+	event = new Event('dataready');
+	document.dispatchEvent(event);
 }
 
 
@@ -446,40 +468,6 @@ function setrepere (idrepere)
     cachereperesmenu ();
 }
 
-function onload()
-{
-    if (0)
-    { $('<div>').simpledialog2({
-        mode: 'button',
-        headerText: 'nouvelle partie ?',
-        headerClose: true,
-        buttonPrompt: 'Récupérer dernière partie ?',
-          forceinput: true,
-          left : true,
-          themeDialog: 'a',
-        buttons : {
-              'Oui': {
-                click: function () { 
-                  getpartiecache ();
-                }
-              },
-              'Non': {
-                click: function () { 
-                  //alert ("rien");
-                },
-                icon: "delete",
-                theme: "d",
-                }
-            }
-        });
-    }
-//    alert ("get cache");
-//     getpartiecache ();
-//    alert ("apres cache");
-
-     cachehandler = setInterval("setcache()", 30000);
-}
-
 function setcache () {    
     var scoremail = [];
     var pointsmail = [];
@@ -520,7 +508,6 @@ function getpartiecache ()
     $.getJSON(urlJSON, {format: "json"}, function(data){
         $.each(data, function(key, val) {        
             idx++;
-          //  alert (idx);
             switch (idx) {
                     case 1: 
                     uuid = val;
@@ -589,9 +576,20 @@ function getpartiecache ()
         );
         init_parcours (courseindex);
 
-    });   
-    
+    });
+
+    $( document ).ajaxError(function( event, request, settings ) {
+    if (0) {           $('<div>').simpledialog2({
+                mode: 'blank',
+                headerText: 'Problème de réseau !',
+                headerClose: true,
+                blankContent : "<a rel='close' data-role='button' href='#'>Essayer plus tard</a>"
+            })
+           }
+        init_parcours (1);
+    });
 }
+
 
 function sauvepartie () {    
     var scoremail = [];
