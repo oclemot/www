@@ -13,15 +13,16 @@ body {
     }
 
 body,ul,li {
-    background:#fff url(../images/bkg.jpg) center center no-repeat;
+    background:#fff;
     background-attachment: fixed;
     background-size: auto;
     background-repeat: no-repeat;
-    background-blend-mode: overlay;
+    background-blend-mode:normal ;
     padding:0px;
     margin:0px;
     border:0px;
-    overflow: auto;       
+    overflow: auto;     
+    
 }
  
 body {
