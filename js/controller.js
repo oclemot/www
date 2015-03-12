@@ -1,5 +1,4 @@
 //Fonctions generales
-
 function onDeviceReady() {
         uuid = device.uuid;
         var networkState = navigator.connection.type;
@@ -12,7 +11,7 @@ function onDeviceReady() {
             });
         }
         getpartiecache ();
-//      alert (uuid);
+        alert (uuid);
     
 }
 
