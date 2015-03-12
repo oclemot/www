@@ -372,7 +372,7 @@ function createtableandhandlers()
     
     var tmp2 =""; 
     for (i=1;i<parseInt(nbjoueurs)+1;i++){
-        tmp2 = "<td id='P" + i + "' colspan='2' onclick='addInputText(this)' style='background-color:  #8cc63f;width: 80px;'>"+ joueursname[i] +"</td>" ;
+        tmp2 = "<td id='P" + i + "' colspan='2' onclick='addInputText(this)' style='background-color:  #009245;width: 80px;'>"+ joueursname[i] +"</td>" ;
         //alert (tmp2);
         tbody+=tmp2;
     }
@@ -386,7 +386,7 @@ function createtableandhandlers()
     
     tmp2 =""; 
     for (i=1;i<parseInt(nbjoueurs)+1;i++){
-        tmp2 = "<td id='P" + i + "Idx"+ "' onclick='addInputNumber(this,2)' style='width: 40px;text-align:center;background-color:#8cc63f'></td> <td id='P" + i + "repere' onclick='affichereperesmenu (P" + i + "repere);' style='background-repeat:no-repeat;background-position: center center;background-color:#8cc63f'> </td>" ;
+        tmp2 = "<td id='P" + i + "Idx"+ "' onclick='addInputNumber(this,2)' style='width: 40px;text-align:center;background-color:#009245'></td> <td id='P" + i + "repere' onclick='affichereperesmenu (P" + i + "repere);' style='background-repeat:no-repeat;background-position: center center;background-color:#009245'> </td>" ;
         //alert (tmp2);
         tbody+=tmp2;
     }
@@ -422,7 +422,7 @@ function createtableandhandlers()
   
 
       for (j=1;j<=parseInt(nbjoueurs);j++) { 
-          tmp2 = "<td id='H" + i + "P" + j +"' onclick='addInputNumber(this,1)' style='width: 40px; background-repeat: no-repeat; text-align:center;'></td>" ;
+          tmp2 = "<td id='H" + i + "P" + j +"' onclick='addInputNumber(this,1)' style='width: 40px; background-repeat: no-repeat; text-align:center;background-color:#009245'></td>" ;
         //alert (tmp2);
         tbody+=tmp2;
           
@@ -465,7 +465,7 @@ function createtableandhandlers()
 
           for (j=1;j<=parseInt(nbjoueurs);j++){
               tmpid ="H"+ i + "P" + j;
-              tbody+="<td id='"+ tmpid +"' onclick = 'addInputNumber(this,1)' style='width: 40px; background-repeat: no-repeat;text-align:center;'></td>";
+              tbody+="<td id='"+ tmpid +"' onclick = 'addInputNumber(this,1)' style='width: 40px; background-repeat: no-repeat;text-align:center;background-color:#009245'></td>";
               tmpid ="H"+ i + "P" + j + "net";
               tbody+="<td id='" +tmpid +"' style='width: 40px; background-color:#8cc63f;text-align:center;'></td>";
             }

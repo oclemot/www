@@ -11,7 +11,7 @@ function onDeviceReady() {
                 blankContent : "<a rel='close' data-role='button' href='#'>Fonctionnalités limitées</a>"
             });
         }      
-      alert (uuid);
+  //    alert (uuid);
 }
 
 
