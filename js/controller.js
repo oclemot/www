@@ -1,6 +1,7 @@
 //Fonctions generales
 function onDeviceReady() {
         uuid = device.uuid;
+        getpartiecache ();
         var networkState = navigator.connection.type;
         if (networkState.type==Connection.NONE){
             $('<div>').simpledialog2({
@@ -9,10 +10,8 @@ function onDeviceReady() {
                 headerClose: true,
                 blankContent : "<a rel='close' data-role='button' href='#'>Fonctionnalités limitées</a>"
             });
-        }
-        getpartiecache ();
-        alert (uuid);
-    
+        }      
+      alert (uuid);
 }
 
 
