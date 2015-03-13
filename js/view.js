@@ -356,9 +356,9 @@ function createtableandhandlers()
     var parOut =0;
     var parIn =0;
     
-    tbody+="<table id='scorecard2mail' style='text-align:center;background-color:#f7931e; color:#fff' border='1' cellpadding='2' cellspacing='2'> <tbody> <tr id='joueurs' style='background-color:#8cc63f; background-repeat: no-repeat;'>";
+    tbody+="<table id='scorecard2mail' style='text-align:center;background-color:#f7931e; color:#fff' border='1' cellpadding='2' cellspacing='2'> <tbody> <tr id='joueurs' style='background-color:#34cf07; background-repeat: no-repeat;'>";
     
-    tbody+="<td style='background-color:#8cc63f; text-align:center' colspan='";
+    tbody+="<td style='background-color:#34cf07; text-align:center' colspan='";
     var nbcolonnesheader =1+ affichehcp+affichepar;
     var tmpint=nbcolonnesheader+2*nbjoueurs; //nbcolonnestotal
     tbody+=tmpint;
@@ -366,7 +366,7 @@ function createtableandhandlers()
     tbody+=coursename;
     tbody+="</td> <tr> <td  colspan='";
     tbody+=nbcolonnesheader;
-    tbody+="' style='background-color:#8cc63f;width:20px;'></td>";
+    tbody+="' style='background-color:#34cf07;width:20px;'></td>";
     
 //Ligne JOUEURS    
     
@@ -377,7 +377,7 @@ function createtableandhandlers()
         tbody+=tmp2;
     }
     
-    tbody+="</tr><tr style='background-color:#8cc63f;text-align:center'> <td colspan='";
+    tbody+="</tr><tr style='background-color:#34cf07;text-align:center'> <td colspan='";
     
     tbody+=nbcolonnesheader;
     tbody+="' style='width:20px;'>Index/Départ</td>";      
@@ -386,19 +386,19 @@ function createtableandhandlers()
     
     tmp2 =""; 
     for (i=1;i<parseInt(nbjoueurs)+1;i++){
-        tmp2 = "<td id='P" + i + "Idx"+ "' onclick='addInputNumber(this,2)' style='width: 40px;text-align:center;background-color:#009245'></td> <td id='P" + i + "repere' onclick='affichereperesmenu (P" + i + "repere);' style='background-repeat:no-repeat;background-position: center center;background-color:#009245'> </td>" ;
+        tmp2 = "<td id='P" + i + "Idx"+ "' onclick='addInputNumber(this,2)' style='width:40px;text-align:center;background-color:#009245;'></td> <td id='P" + i + "repere' onclick='affichereperesmenu (P" + i + "repere);' style='background-repeat:no-repeat;background-position: center center;background-color:#009245'> </td>" ;
         //alert (tmp2);
         tbody+=tmp2;
     }
     
-    tbody+="</tr> <tr style='background-color: #8cc63f;'><td>#</td>";
+    tbody+="</tr> <tr style='background-color: #34cf07;'><td>#</td>";
     
     if (affichehcp) {
-        tbody+="<td style='background-color:  #8cc63f'>Hcp</td>";
+        tbody+="<td style='background-color:  #34cf07'>Hcp</td>";
     }
     
     if (affichepar){
-        tbody+="<td style='background-color:  #8cc63f'>Par</td>";
+        tbody+="<td style='background-color:  #34cf07'>Par</td>";
     }
     
 
@@ -416,9 +416,9 @@ function createtableandhandlers()
       tbody+="<tr>"; 
       tmpid = "H" +i;
       //alert ("tmpid=" + tmpid);
-      tbody+="<td id="+ tmpid + " style='width:20px; text-align:center;background-color:  #8cc63f'>"+ i + " </td>";
-      if (affichehcp) tbody+="<td id="+ tmpid + " style='width:20px; text-align:center;background-color:  #8cc63f'>"+ coursehcp[i-1] + " </td>";
-      if (affichepar) tbody+="<td id="+ tmpid + " style='width:20px; text-align:center;background-color:  #8cc63f'>"+ coursepar[i-1] + " </td>";
+      tbody+="<td id="+ tmpid + " style='width:20px; text-align:center;background-color:  #34cf07'>"+ i + " </td>";
+      if (affichehcp) tbody+="<td id="+ tmpid + " style='width:20px; text-align:center;background-color:  #34cf07'>"+ coursehcp[i-1] + " </td>";
+      if (affichepar) tbody+="<td id="+ tmpid + " style='width:20px; text-align:center;background-color:  #34cf07'>"+ coursepar[i-1] + " </td>";
   
 
       for (j=1;j<=parseInt(nbjoueurs);j++) { 
@@ -427,7 +427,7 @@ function createtableandhandlers()
         tbody+=tmp2;
           
         tmpid ="H"+ i + "P" + j + "net";
-        tbody+="<td id='" +tmpid +"' style='width: 40px; background-color: #8cc63f; background-repeat: no-repeat; text-align:center;'></td>";
+        tbody+="<td id='" +tmpid +"' style='width: 40px; background-color: #34cf07; background-repeat: no-repeat; text-align:center;'></td>";
         }
       }
     
@@ -438,7 +438,7 @@ function createtableandhandlers()
     
     if (b18T===18)
     {
-        tbody+="<tr style ='background-color:#8cc63f';background-repeat: no-repeat;><td style='text-align:center' colspan='";
+        tbody+="<tr style ='background-color:#34cf07';background-repeat: no-repeat;><td style='text-align:center' colspan='";
         tmpint=nbcolonnesheader-1;
         tbody+=tmpint;
         tbody+="'>Out</td>";
@@ -448,7 +448,7 @@ function createtableandhandlers()
 //Ligne OUT        
         
         for (i=1; i<=parseInt(nbjoueurs);i++){
-            tbody+="<td id='OUT"+ i +"' style='background-repeat: no-repeat;text-align:center;background-color: #8cc63f'></td><td id='OUT" +i +"net' style='background-repeat: no-repeat;text-align:center;'></td>";
+            tbody+="<td id='OUT"+ i +"' style='background-repeat: no-repeat;text-align:center;background-color: #34cf07'></td><td id='OUT" +i +"net' style='background-repeat: no-repeat;text-align:center;'></td>";
         }  
 
         tbody+="</tr>";
@@ -458,20 +458,20 @@ function createtableandhandlers()
        for (i=10;i<19;i++){ 
           tbody+="<tr>"; 
           tmpid = "H"+ i ;
-          tbody+="<td id='"+ tmpid + "'  style='width: 20px;background-color:  #8cc63f'>"+ i + " </td>";
-          if (affichehcp) tbody+="<td id="+ tmpid + " style='width:20px; text-align:center;background-color:  #8cc63f'>"+ coursehcp[i-1] + " </td>";
-          if (affichepar) tbody+="<td id="+ tmpid + " style='width:20px; text-align:center;background-color:  #8cc63f'>"+ coursepar[i-1] + " </td>";
+          tbody+="<td id='"+ tmpid + "'  style='width: 20px;background-color:  #34cf07'>"+ i + " </td>";
+          if (affichehcp) tbody+="<td id="+ tmpid + " style='width:20px; text-align:center;background-color:  #34cf07'>"+ coursehcp[i-1] + " </td>";
+          if (affichepar) tbody+="<td id="+ tmpid + " style='width:20px; text-align:center;background-color:  #34cf07'>"+ coursepar[i-1] + " </td>";
 
 
           for (j=1;j<=parseInt(nbjoueurs);j++){
               tmpid ="H"+ i + "P" + j;
               tbody+="<td id='"+ tmpid +"' onclick = 'addInputNumber(this,1)' style='width: 40px; background-repeat: no-repeat;text-align:center;background-color:#009245'></td>";
               tmpid ="H"+ i + "P" + j + "net";
-              tbody+="<td id='" +tmpid +"' style='width: 40px; background-color:#8cc63f;text-align:center;'></td>";
+              tbody+="<td id='" +tmpid +"' style='width: 40px; background-color:#34cf07;text-align:center;'></td>";
             }
         }
 
-        tbody+="<tr style ='background-color:#8cc63f';background-repeat: no-repeat;text-align:center;';><td style='text-align:center' colspan='";
+        tbody+="<tr style ='background-color:#34cf07';background-repeat: no-repeat;text-align:center;';><td style='text-align:center' colspan='";
         tmpint=nbcolonnesheader-1;
         tbody+=tmpint;
         tbody+="'>In</td>";
@@ -487,7 +487,7 @@ function createtableandhandlers()
             }       
 
         tbody+="</tr>";
-        tbody+="<tr style ='background-color:#8cc63f';background-repeat: no-repeat;text-align:center;'><td style='text-align:center' colspan='";
+        tbody+="<tr style ='background-color:#34cf07';background-repeat: no-repeat;text-align:center;'><td style='text-align:center' colspan='";
         tmpint=nbcolonnesheader-1;
         tbody+=tmpint;
         tbody+="'>Out</td>";
@@ -496,7 +496,7 @@ function createtableandhandlers()
         
         //LIgnes OUT (répétée)
             for (i=1;i<=parseInt(nbjoueurs);i++) {
-                tbody+="<td id='OUT" +i +"bis' style='background-repeat: no-repeat;text-align:center;ackground-color:  #8cc63f'></td> <td id='OUT"+ i + "bisnet' style='background-repeat: no-repeat;text-align:center;'></td>";
+                tbody+="<td id='OUT" +i +"bis' style='background-repeat: no-repeat;text-align:center;ackground-color:  #34cf07'></td> <td id='OUT"+ i + "bisnet' style='background-repeat: no-repeat;text-align:center;'></td>";
             }
             tbody+="</tr>";
     }
@@ -505,7 +505,7 @@ function createtableandhandlers()
     
 //LIGNE TOTAL    
     
-        tbody+="<tr style ='background-color:#8cc63f'; background-repeat: no-repeat';><td style='text-align:center' colspan='";
+        tbody+="<tr style ='background-color:#34cf07'; background-repeat: no-repeat';><td style='text-align:center' colspan='";
         tmpint=nbcolonnesheader-1;
         tbody+=tmpint;//alert(nbcolonnesheader);
         tbody+="'>Total</td> <td>";

@@ -35,10 +35,11 @@
     
     <script>
      (function($){
-            $(window).load(function(){
-                $(".content").mCustomScrollbar();
+            $(".content").mCustomScrollbar({
+                axis:"x" // horizontal scrollbar
             });
-        })(jQuery);
+        })
+     (jQuery);
 
      </script>
 

@@ -213,7 +213,7 @@ function blinkcell (cel) {
     if (flagblink==1){
 
         td.style.backgroundColor="red";   
-        flaglink = 0;
+        flagblink = 0;
     }
     else {
         td.style.backgroundColor=currbg;
@@ -226,7 +226,7 @@ function addInputNumber(elm, idmode)
 //handler de traitement inputs
 {
     if (scoreallowed) {
-       // alert ("cel ="+elm.parentNode.getAttribute('id'));
+        //alert ("cel ="+elm.parentNode.getAttribute('id'));
         if (xblink!=undefined) clearInterval(xblink);
         var td=document.getElementById(currentcell);
         if (td!=undefined) td.style.backgroundColor=currbg;
@@ -277,11 +277,14 @@ function addkey(key, idobject){
     var tmp4=td.innerHTML;
     
     if (tmp3==="Idx"){
-    //modify index    
+    //modify index
+        
+    //    alert (key);
+        
         scoreallowed=false;
         //joueuridx[currentplayer][0]=key;
         if (key===66) {
-            //alert (tmp4.indexOf(","));
+           // alert ("rr "+ tmp4.indexOf(","));
             if (tmp4.indexOf(",")==-1) key=".";
             else key="";
         }   
@@ -310,7 +313,8 @@ function addkey(key, idobject){
                 affichetotaux ();
             }
             scoreallowed=true;
-			event = new Event('dataready');
+           // alert (key);
+            event = new Event('dataready');
             document.dispatchEvent(event);
             return;
         }
@@ -335,9 +339,9 @@ function addkey(key, idobject){
         cachekeypad();
         clearInterval(xblink);
         td.style.backgroundColor=currbg;
+        event = new Event('dataready');
+        document.dispatchEvent(event);
     }
-	event = new Event('dataready');
-	document.dispatchEvent(event);
 }
 
 
