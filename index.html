@@ -34,7 +34,10 @@
     <script src="js/jquery.json.min.js"></script>
     
     <script>
-        
+    
+        $(document).bind("mobileinit", function(){
+            $.mobile.touchOverflowEnabled = true;
+        });
         
 //     (function($){
 //            $(".content").mCustomScrollbar({
