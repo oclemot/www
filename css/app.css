@@ -33,6 +33,11 @@ input, textarea  {
     -webkit-user-select: text ; -moz-user-select: text ; -ms-user-select: text ; user-select: text ;
 }
 
+#toscroll {
+ 
+    overflow: scroll;
+}
+
 #keypad {
     width: 100%;    
     position: fixed;

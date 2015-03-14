@@ -29,26 +29,12 @@
 
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"> </script>
-    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="js/jquery.mobile.simpledialog2.min.js"></script> 
     <script src="js/jquery.json.min.js"></script>
+    <script src="js/iscroll-lite.js"></script>
     
-    <script>
     
-        $(document).bind("mobileinit", function(){
-            $.mobile.touchOverflowEnabled = true;
-        });
-        
-//     (function($){
-//            $(".content").mCustomScrollbar({
-//                axis:"x" // horizontal scrollbar
-//            });
-//        })
-//     (jQuery);
-
-     </script>
-
-   <script src="js/app.js"></script>            <!-- for your event code, see README and file comments for details -->
+    <script src="js/app.js"></script>            <!-- for your event code, see README and file comments for details -->
     <script src="js/init-app.js"></script>  <!--      for your init code, see README and file comments for details -->
     <script src="xdk/init-dev.js"></script>     <!-- normalizes device and document ready events, see README for details -->
     <script src="js/init-var.js"></script>
@@ -61,11 +47,18 @@
 <script>
             init_variables();
 </script>    
-        
-</head>
-<body>
     
-    <div data-role="page">        
+<script>
+        var myScroll;
+        function loaded() {
+            myScroll = new IScroll('#toscroll');
+        }
+</script>
+
+</head>
+<body onload="loaded()">
+    
+    <div id="maindiv" data-role="page">        
         <div data-role="header" data-position="fixed" style="text-align:left" id="menubar">
             <div data-role="navbar">
                 <script>
@@ -91,8 +84,10 @@
                 cachereperesmenu ();
             </script>
         </div>
-
-        <div data-role="content" id="wrappertable" class="mCustomScrollbar" data-scroll="true">        
+        <div id="toscroll"> 
+            <div id="wrappertable">        
+                
+            </div>
         </div>
         <div id="keypad">
             <script>
