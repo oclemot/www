@@ -4,7 +4,7 @@
 
 	// Decode the JSON array
 	$tableData2 = json_decode($tableData,TRUE);
-   	$uuid =  $tableData2["uuid"] . "." . time() . '.save';
+   	$uuid =  $tableData2["uuid"] . "." . date("dd mm yy h:i") . '.save';
 	
 	$fileh = fopen ($uuid, "w");
 	fwrite ($fileh, $tableData);
