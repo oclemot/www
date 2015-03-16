@@ -120,7 +120,7 @@ function calculepointsnet (idhole)
  var joueursetpoints=0;
  var pointsshared =0;
  var pointsadistribuer = nbjoueurs;
- var i,j;
+ var j;
     
 for (i=0;i<nbjoueurs;i++){
         points[idhole][i]=0;   
@@ -174,7 +174,7 @@ if (gamemode===1){
             //      alert ("score "+ score[idhole][ee]);
             
             //alert ("index " +joueursindex[ee]);
-            if (score [idhole][ee]!=0){
+            if (score [idhole][ee]!==0){
                 ppar=parseInt(idhole)-1;
                 pp = parseInt(coursepar[ppar]) + parseInt(coupsrecus[idhole][ee]) - parseInt(score[idhole][ee])+ 2;
                 if (pp>0) points[idhole][ee] = pp;
@@ -227,9 +227,9 @@ function addInputNumber(elm, idmode)
 {
     if (scoreallowed) {
         //alert ("cel ="+elm.parentNode.getAttribute('id'));
-        if (xblink!=undefined) clearInterval(xblink);
+        if (xblink!==undefined) clearInterval(xblink);
         var td=document.getElementById(currentcell);
-        if (td!=undefined) td.style.backgroundColor=currbg;
+        if (td!==undefined) td.style.backgroundColor=currbg;
 
         currentcell = elm.getAttribute("id");
        // alert ("currentcell= "+currentcell);
@@ -323,7 +323,7 @@ function addkey(key, idobject){
     else {    
         //modify score
         
-        var tmp3 = tmp.slice(1,pos);
+        tmp3 = tmp.slice(1,pos);
         var currenthole = parseInt (tmp3);
 
         if (key===67) {
@@ -421,7 +421,7 @@ function mail_send () {
         'joueursreperes' : joueursreperes,
         'joueursname' : joueursname,
         'b18T' : b18T
-    }
+    };
     input_data = $.toJSON(input_data);
         
     $.ajax({
@@ -468,6 +468,7 @@ function setrepere (idrepere)
     joueursreperes[parseInt(tmp3)-1]=idrepere;
     //alert ("joueur reperes set"+joueursreperes[parseInt(tmp3)]);
     cachereperesmenu ();
+    setcache ();
 }
 
 function setcache () {    
@@ -492,7 +493,7 @@ function setcache () {
         'b18T' : b18T,
         'gamemode' : gamemode,
         'courseindex' : courseindex
-    }
+    };
     input_data = $.toJSON(input_data);
     
     $.ajax({
@@ -586,7 +587,7 @@ function getpartiecache ()
                 headerText: 'Problème de réseau !',
                 headerClose: true,
                 blankContent : "<a rel='close' data-role='button' href='#'>Essayer plus tard</a>"
-            })
+            });
            }
         init_parcours (1);
     });
@@ -615,7 +616,7 @@ function sauvepartie () {
         'b18T' : b18T,
         'gamemode' : gamemode,
         'courseindex' : courseindex
-    }
+    };
     input_data = $.toJSON(input_data);
     
     $.ajax({

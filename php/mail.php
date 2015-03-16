@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	// Unescape the string values in the JSON array
 	$tableData = stripcslashes($_GET["pTableData"]);
 
@@ -30,8 +30,12 @@
 	
 	for ($i=0; $i<9;$i++) $tmpparOut+=$tableData["coursepar"][$i];
 	for ($i=9; $i<18;$i++) $tmpparIn+=$tableData["coursepar"][$i];
-	if (intval($tableData["b18T"])==18){ $tmppar = $tmpparIn+$tmpparOut}
-Else  $tmppar = $tmpparIn;
+	if (intval($tableData["b18T"])==18){ 
+		$tmppar = $tmpparIn+$tmpparOut;
+	} else {
+		$tmppar = $tmpparOut;
+	}
+
 		
 		
 	$message.=strval($tmpint);
