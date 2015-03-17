@@ -13,7 +13,6 @@ body {
     }
 
 body,ul,li {
-    background:#fff;
     background-attachment: fixed;
     background-size: auto;
     background-repeat: no-repeat;
