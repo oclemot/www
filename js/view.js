@@ -857,7 +857,7 @@ var i,j,tt;
 var tmpid;
     
     for (i=1; i<=parseInt(nbjoueurs);i++){
-        for (j=1;j<b18T;j++){
+        for (j=1;j<=b18T;j++){
             tmpid = "H" +j+"P"+i;
             tt=document.getElementById (tmpid);
             tt.innerHTML="";

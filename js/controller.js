@@ -249,18 +249,24 @@ function clearscorecard ()
 {
     sauvepartie ();
     
-     for (i=1; i<22; i++){  
+    for (i=1; i<22; i++){  
                 for (j=0;j<4;j++){
                     score[i][j]=0;
                     points[i][j]=0;
                 }
          
     }
-    for (j=0;j<4;j++)
+    for (j=0;j<4;j++){
         joueursindex[j]=0;
+        joueursreperes[j]=1;
+        joueursname[j]="joueur"+j;
+    }
     
-    effacecoupsrecus();
-    effacejoueurs ();
+    //effacecoupsrecus();
+    //effacejoueurs ();
+    event = new Event('dataready');
+    document.dispatchEvent(event);
+    setcache ();
     videscorecard();
 }
 
