@@ -226,13 +226,15 @@ function addInputNumber(elm, idmode)
 //handler de traitement inputs
 {
     if (scoreallowed) {
-        //alert ("cel ="+elm.parentNode.getAttribute('id'));
+
+        currentcell = elm.getAttribute("id");
+       // alert ("currentcell= "+currentcell);
+        
         if (xblink!==undefined) clearInterval(xblink);
         var td=document.getElementById(currentcell);
         if (td!==undefined) td.style.backgroundColor=currbg;
 
-        currentcell = elm.getAttribute("id");
-       // alert ("currentcell= "+currentcell);
+        
 
         var tmp = document.getElementById(currentcell);
         currbg = tmp.style.backgroundColor;
