@@ -536,7 +536,6 @@ function affichescoresbrut (idhole)
  
 function affichescoresnet (idhole)
 {
-    
 if (nbjoueurs!=2) {    
      for (j=0;j<parseInt(nbjoueurs);j++) {     
          var tmp2=j+1;
@@ -740,13 +739,10 @@ function affichereperes ()
     var tmp;
     for (tz=0;tz<parseInt(nbjoueurs); tz++){
        ji=tz+1;
-//       alert ("repere joueur"+joueursreperes[tz]);
        tmp="P"+ji+"repere";
-       //alert (tmp);
        td = document.getElementById(tmp);
-       //alert (td);
-//
-        switch (joueursreperes[tz]){
+
+    switch (joueursreperes[tz]){
          case 1:
                 td.style.backgroundImage="url(images/reper_blanc.gif)";
                 break;
@@ -772,18 +768,13 @@ function affichecoupsrecus()
     var tmp;
     var tmp2;
     var tmpstr;
-   // alert ("affiche coups reçus");
     for (j=0;j<parseInt(nbjoueurs); j++){
         for (i=1;i<=b18T;i++) {
             if (coupsrecus[i][j]!=0) {
-                //alert ("trou ="+i);
-                //alert ("coups recus ="+coupsrecus[i][j]);
                 tmp=j+1;
                 tmpstr = "H"+i+"P"+tmp;
-                //alert (tmpstr);
                 td = document.getElementById(tmpstr);
                 imgsrc="url(images/"+ coupsrecus[i][j]+ ".png)";
-                //alert ("imgsrc["+i+"] ="+imgsrc);
                 td.style.backgroundImage=imgsrc;      
             }
         }   
@@ -811,7 +802,6 @@ function affichecoupsrecus()
             if (coupsrecus[20][j]!=0){
                 tmp = "IN"+tmp2;
                 tt = document.getElementById(tmp);
-             //   alert ("coups recus20 " + j + " "+ coupsrecus[20][j]);
                 imgsrc="url(images/"+ coupsrecus[20][j]+ ".png)";
                 //alert ("imgsrc ="+imgsrc);
                 tt.style.backgroundImage=imgsrc;
@@ -843,27 +833,19 @@ function effacecoupsrecus()
         
         tmp2=j+1;
         tmp = "Score"+tmp2;
-        //     alert ("id à retrouver = "+tmp);
-        //alert ("j= "+j);
         tt = document.getElementById(tmp);
         if (b18T==18) imgsrc="url(images/empty.png)";
         else imgsrc="url(images/empty.png)";
-        //alert ("imgsrc ="+imgsrc);
         tt.style.backgroundImage=imgsrc; 
         if (b18T==18){
             if (coupsrecus[19][j]!=0){
                 tmp = "OUT"+tmp2;
-            //    alert (tmp);
                 tt = document.getElementById(tmp);
-                //alert ("points21 " + j + " "+ coupsrecus[19][j]);
                 imgsrc="url(images/empty.png)";
-                //alert ("imgsrc ="+imgsrc);
                 tt.style.backgroundImage=imgsrc;
                 tmp = "OUT"+tmp2+"bis";
                 tt = document.getElementById(tmp);
-                //         alert ("points21 " + j + " "+ points[21][j]);
                 tt.style.backgroundImage=imgsrc;
-           //     alert ("coups recus19 " + j + " "+ coupsrecus[19][j]);
                 }
             if (coupsrecus[20][j]!=0){
                 tmp = "IN"+tmp2;
@@ -894,50 +876,7 @@ function effacejoueurs ()
     }
 }
 
-//function videscorecard()
-//{
-//var i,j,tt;
-//var tmpid;
-    
-//    for (i=1; i<=parseInt(nbjoueurs);i++){
-//        for (j=1;j<=b18T;j++){
-//            tmpid = "H" +j+"P"+i;
-//            tt=document.getElementById (tmpid);
-//            tt.innerHTML="";
-//            tmpid = "H" +j+"P"+i+"net";
-//            tt=document.getElementById (tmpid);
-//            tt.innerHTML="";     
-//        }
-        
-//        tmpid = "Score" +i;
-//        tt=document.getElementById (tmpid);
-//        tt.innerHTML="";
-//        tmpid = "Score" +i+"net";
-//        tt=document.getElementById (tmpid);
-//        tt.innerHTML="";
 
-  //      if (b18T==18){
-//            tmpid = "OUT" +i;
-  //          tt=document.getElementById (tmpid);
-    //        tt.innerHTML="";
-//            tmpid = "OUT" +i+"net";
-//            tt=document.getElementById (tmpid);
-//            tt.innerHTML="";
-//            tmpid = "OUT" +i+"bis";
-//            tt=document.getElementById (tmpid);
-//            tt.innerHTML="";
-//            tmpid = "OUT" +i+"bisnet";
-//            tt=document.getElementById (tmpid);
-//            tt.innerHTML="";
-//            tmpid = "IN" +i;
-//            tt=document.getElementById (tmpid);
-//            tt.innerHTML="";
-//            tmpid = "IN" +i+"net";
-//            tt=document.getElementById (tmpid);
-//            tt.innerHTML="";
-//            }
-//    }
-//}
 
 function affichetout ()
 {
