@@ -536,23 +536,59 @@ function affichescoresbrut (idhole)
  
 function affichescoresnet (idhole)
 {
- for (j=0;j<parseInt(nbjoueurs);j++) {     
-     var tmp2=j+1;
     
-     if (points[idhole][j]!=0){
-            var tmp3="H"+idhole+"P"+tmp2+"net";
-           // alert ("tmp3=" + tmp3);
-            var t3 = document.getElementById (tmp3);
-            t3.innerHTML=points[idhole][j];
-            }
-     if ((points[idhole][j]==0) && (score[idhole][j]!=0)){
-            var tmp4="H"+idhole+"P"+tmp2+"net";
-            //alert ("tmp4=" + tmp4);
-            var t4 = document.getElementById (tmp4);
-            t4.innerHTML='0';        
+if (nbjoueurs!=2) {    
+     for (j=0;j<parseInt(nbjoueurs);j++) {     
+         var tmp2=j+1;
+
+         if (points[idhole][j]!=0){
+                var tmp3="H"+idhole+"P"+tmp2+"net";
+               // alert ("tmp3=" + tmp3);
+                var t3 = document.getElementById (tmp3);
+                t3.innerHTML=points[idhole][j];
+                }
+         if ((points[idhole][j]==0) && (score[idhole][j]!=0)){
+                var tmp4="H"+idhole+"P"+tmp2+"net";
+                //alert ("tmp4=" + tmp4);
+                var t4 = document.getElementById (tmp4);
+                t4.innerHTML='0';        
+         }
+
      }
-     
- }   
+    }
+    else {
+        if (score[idhole][0]*score[idhole][1]==0) return;
+        var tmpHP1="H"+idhole+"P1net";
+        var tmpHP2="H"+idhole+"P2net";
+        var tdHP1 = document.getElementById (tmpHP1);
+        var tdHP2 = document.getElementById (tmpHP2);
+        var totalintermediaire1 =0;
+        var totalintermediaire2 = 0;
+        var cpt;
+        for (cpt = 1; cpt<=idhole; cpt++) {
+            totalintermediaire1+=points[cpt][0];
+            totalintermediaire2+=points[cpt][1];
+        }
+        var delta = totalintermediaire1-totalintermediaire2;
+        if (delta>0) {
+            imgsrc="url(images/MP"+ delta + ".png)";
+            tdHP1.style.backgroundImage=imgsrc;      
+            tdHP1.style.backgroundPosition="center";
+        }
+        if (delta<0) {
+            var absdelta = -delta;
+            imgsrc="url(images/MP"+ absdelta + ".png)";
+            tdHP2.style.backgroundImage=imgsrc;     
+            tdHP2.style.backgroundPosition="center";
+        }
+        if (delta==0) {
+        imgsrc="url(images/MP0.png)";
+        tdHP1.style.backgroundImage=imgsrc;
+        tdHP1.style.backgroundPosition="center";
+        tdHP2.style.backgroundImage=imgsrc;      
+        tdHP2.style.backgroundPosition="center";
+        }
+    }
 }
 
 function affichetotaux()
@@ -562,18 +598,45 @@ function affichetotaux()
     var xstrtmp="";
     var xtt;
 
+    if (nbjoueurs==2)
+    {
+             //display match play   
+            var delta = points[21][0]-points[21][1];
+            if (delta>0) {
+                imgsrc="url(images/MP"+ delta + ".png)";
+                var tdscore1 = document.getElementById("Score1net");
+                tdscore1.style.backgroundImage=imgsrc;
+                tdscore1.style.backgroundPosition="center";
+            }
+            if (delta<0) {
+                var absdelta = -delta;
+                imgsrc="url(images/MP"+ absdelta + ".png)";
+                var tdscore2 = document.getElementById("Score2net");
+                tdscore2.style.backgroundImage=imgsrc;
+                tdscore2.style.backgroundPosition="center";
+            }
+            if (delta==0) {
+            imgsrc="url(images/MP0.png)";
+            var tdscore1 = document.getElementById("Score1net");
+            var tdscore2 = document.getElementById("Score2net");
+            tdscore1.style.backgroundPosition="center";
+            tdscore2.style.backgroundPosition="center";
+            tdscore1.style.backgroundImage=imgsrc;      
+            tdscore2.style.backgroundImage=imgsrc;      
+            }
+    }
+    else {
     
     for (jz=0;jz<parseInt(nbjoueurs);jz++) {     
      // Affiche les totaux OUT IN et TOTAL
         var tmp2=jz+1;
         if (score[21][jz]!=0) {
             var tmp = "Score"+tmp2;
-        //    alert ("id à retrouver XX= "+tmp);
             var tt = document.getElementById(tmp);
-            //alert ("points21 " + j + " "+ points[21][j]);
             tt.innerHTML=score[21][jz]; 
         }
-         //Affiche les scores nets
+
+        //Affiche les scores nets
         if (points[21][jz]!=0) {
             tmp = "Score"+tmp2+"net";
             //alert ("id à retrouver = "+tmp);
@@ -587,54 +650,48 @@ function affichetotaux()
                 xtt = document.getElementById(xstrtmp);
                 if (xtt.innerHTML!="") {
                     tmp = "Score"+tmp2+"net";
-                    //alert ("id à retrouver = "+tmp);
                     var tt = document.getElementById(tmp);
-                    //alert ("points21 " + j + " "+ points[21][j]);
                     tt.innerHTML='0'; 
                 }
             }
         }
-        if (b18T==18){
-            if (score[19][jz]!==0){
-                tmp = "OUT"+tmp2;
-                tt = document.getElementById(tmp);
-                //alert ("points21 " + j + " "+ points[21][j]);
-                tt.innerHTML=score[19][jz]; 
+    }
 
-                tmp = "OUT"+tmp2+"bis";
-                tt = document.getElementById(tmp);
-                //         alert ("points21 " + j + " "+ points[21][j]);
-                tt.innerHTML=score[19][jz];
-                tmp = "IN"+tmp2;
-                tt = document.getElementById(tmp);
-                //alert ("points21 " + j + " "+ points[21][j]);
-                tt.innerHTML=score[20][jz]; 
-            }
+    if (b18T==18){
+        if (score[19][jz]!==0){
+            tmp = "OUT"+tmp2;
+            tt = document.getElementById(tmp);
+            tt.innerHTML=score[19][jz]; 
+            tmp = "OUT"+tmp2+"bis";
+            tt = document.getElementById(tmp);
+            tt.innerHTML=score[19][jz];
+            tmp = "IN"+tmp2;
+            tt = document.getElementById(tmp);
+            tt.innerHTML=score[20][jz]; 
+        }
+            
             if (points[19][jz]!=0){
                 tmp = "OUT"+tmp2+"net";
                 tt = document.getElementById(tmp);
-                //alert ("points21 " + j + " "+ points[21][j]);
                 tt.innerHTML=points[19][jz]; 
                 tmp = "OUT"+tmp2+"bisnet";
                 tt = document.getElementById(tmp);
-                //         alert ("points21 " + j + " "+ points[21][j]);
                 tt.innerHTML=points[19][jz];
             }
             if (points[19][jz]==0){
-                    for (xtmp=1;xtmp<19;xtmp++){
-                    xstrtmp="H"+xtmp+"P"+tmp2+"net";
-                    xtt = document.getElementById(xstrtmp);
-                    if (xtt.innerHTML!="") {
-                        tmp = "OUT"+tmp2+"net";
-                        tt = document.getElementById(tmp);
-                        tt.innerHTML='0'; 
-                        tmp = "OUT"+tmp2+"bisnet";
-                        tt = document.getElementById(tmp);
-                        tt.innerHTML='0';
-                        break;
+                for (xtmp=1;xtmp<19;xtmp++){
+                xstrtmp="H"+xtmp+"P"+tmp2+"net";
+                xtt = document.getElementById(xstrtmp);
+                if (xtt.innerHTML!="") {
+                    tmp = "OUT"+tmp2+"net";
+                    tt = document.getElementById(tmp);
+                    tt.innerHTML='0'; 
+                    tmp = "OUT"+tmp2+"bisnet";
+                    tt = document.getElementById(tmp);
+                    tt.innerHTML='0';
+                    break;
                     }
-                }
-                    
+                }    
             }
             if (points[20][jz]!=0){
                 tmp = "IN"+tmp2+"net";
@@ -730,40 +787,26 @@ function affichecoupsrecus()
                 td.style.backgroundImage=imgsrc;      
             }
         }   
-        
-       // alert (coupsrecus[21][j]);
-     // Affiche les coups recus OUT IN et TOTAL
+        // Affiche les coups recus OUT IN et TOTAL
         if (coupsrecus[21][j]!=0) {
             //alert (j);
             tmp2=j+1;
             tmp = "Score"+tmp2;
-       //     alert ("id à retrouver = "+tmp);
-            //alert ("j= "+j);
             tt = document.getElementById(tmp);
-            //alert ("coupsrecus21 " + j + " "+ coupsrecus[21][j]);
             if (b18T==18) imgsrc="url(images/"+ coupsrecus[21][j]+ ".png)";
             else imgsrc="url(images/"+ coupsrecus[19][j]+ ".png)";
-            //alert ("imgsrc ="+imgsrc);
             tt.style.backgroundImage=imgsrc; 
-        //    alert ("done");
-         //   alert ("coups recus21 " + j + " "+ coupsrecus[21][j]);
         }
    
-     //    alert ("b18T= "+b18T);
      if (b18T==18){
             if (coupsrecus[19][j]!=0){
                 tmp = "OUT"+tmp2;
-            //    alert (tmp);
                 tt = document.getElementById(tmp);
-                //alert ("points21 " + j + " "+ coupsrecus[19][j]);
                 imgsrc="url(images/"+ coupsrecus[19][j]+ ".png)";
-                //alert ("imgsrc ="+imgsrc);
                 tt.style.backgroundImage=imgsrc;
                 tmp = "OUT"+tmp2+"bis";
                 tt = document.getElementById(tmp);
-                //         alert ("points21 " + j + " "+ points[21][j]);
                 tt.style.backgroundImage=imgsrc;
-           //     alert ("coups recus19 " + j + " "+ coupsrecus[19][j]);
                 }
             if (coupsrecus[20][j]!=0){
                 tmp = "IN"+tmp2;
@@ -851,50 +894,50 @@ function effacejoueurs ()
     }
 }
 
-function videscorecard()
-{
-var i,j,tt;
-var tmpid;
+//function videscorecard()
+//{
+//var i,j,tt;
+//var tmpid;
     
-    for (i=1; i<=parseInt(nbjoueurs);i++){
-        for (j=1;j<=b18T;j++){
-            tmpid = "H" +j+"P"+i;
-            tt=document.getElementById (tmpid);
-            tt.innerHTML="";
-            tmpid = "H" +j+"P"+i+"net";
-            tt=document.getElementById (tmpid);
-            tt.innerHTML="";     
-        }
+//    for (i=1; i<=parseInt(nbjoueurs);i++){
+//        for (j=1;j<=b18T;j++){
+//            tmpid = "H" +j+"P"+i;
+//            tt=document.getElementById (tmpid);
+//            tt.innerHTML="";
+//            tmpid = "H" +j+"P"+i+"net";
+//            tt=document.getElementById (tmpid);
+//            tt.innerHTML="";     
+//        }
         
-        tmpid = "Score" +i;
-        tt=document.getElementById (tmpid);
-        tt.innerHTML="";
-        tmpid = "Score" +i+"net";
-        tt=document.getElementById (tmpid);
-        tt.innerHTML="";
+//        tmpid = "Score" +i;
+//        tt=document.getElementById (tmpid);
+//        tt.innerHTML="";
+//        tmpid = "Score" +i+"net";
+//        tt=document.getElementById (tmpid);
+//        tt.innerHTML="";
 
-        if (b18T==18){
-            tmpid = "OUT" +i;
-            tt=document.getElementById (tmpid);
-            tt.innerHTML="";
-            tmpid = "OUT" +i+"net";
-            tt=document.getElementById (tmpid);
-            tt.innerHTML="";
-            tmpid = "OUT" +i+"bis";
-            tt=document.getElementById (tmpid);
-            tt.innerHTML="";
-            tmpid = "OUT" +i+"bisnet";
-            tt=document.getElementById (tmpid);
-            tt.innerHTML="";
-            tmpid = "IN" +i;
-            tt=document.getElementById (tmpid);
-            tt.innerHTML="";
-            tmpid = "IN" +i+"net";
-            tt=document.getElementById (tmpid);
-            tt.innerHTML="";
-            }
-    }
-}
+  //      if (b18T==18){
+//            tmpid = "OUT" +i;
+  //          tt=document.getElementById (tmpid);
+    //        tt.innerHTML="";
+//            tmpid = "OUT" +i+"net";
+//            tt=document.getElementById (tmpid);
+//            tt.innerHTML="";
+//            tmpid = "OUT" +i+"bis";
+//            tt=document.getElementById (tmpid);
+//            tt.innerHTML="";
+//            tmpid = "OUT" +i+"bisnet";
+//            tt=document.getElementById (tmpid);
+//            tt.innerHTML="";
+//            tmpid = "IN" +i;
+//            tt=document.getElementById (tmpid);
+//            tt.innerHTML="";
+//            tmpid = "IN" +i+"net";
+//            tt=document.getElementById (tmpid);
+//            tt.innerHTML="";
+//            }
+//    }
+//}
 
 function affichetout ()
 {

@@ -267,7 +267,7 @@ function clearscorecard ()
     event = new Event('dataready');
     document.dispatchEvent(event);
     setcache ();
-    videscorecard();
+  //  videscorecard();
 }
 
 
