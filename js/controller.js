@@ -85,7 +85,7 @@ function calculetotaux ()
     //calcule totaux bruts et nets
     for (j=0;j<nbjoueurs;j++) {        
         
-      //  alert ("point"+j+" "+points[i][j]);
+        
         score[19][j]=0;
         score[20][j]=0;
         score[21][j]=0;
@@ -97,6 +97,7 @@ function calculetotaux ()
         for (i=1;i<10;i++) {
             points[19][j]=points[19][j]+points[i][j];
             score[19][j]=score[19][j]+score[i][j];
+      //      alert ("point"+j+" "+points[i][j]);
         }        
         
         for (i=10;i<19;i++) {

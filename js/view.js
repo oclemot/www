@@ -536,7 +536,7 @@ function affichescoresbrut (idhole)
  
 function affichescoresnet (idhole)
 {
-if (nbjoueurs!=2) {    
+if ((nbjoueurs!=2)||(gamemode==1)) {    
      for (j=0;j<parseInt(nbjoueurs);j++) {     
          var tmp2=j+1;
 
@@ -568,20 +568,22 @@ if (nbjoueurs!=2) {
             totalintermediaire1+=points[cpt][0];
             totalintermediaire2+=points[cpt][1];
         }
+        
         var delta = totalintermediaire1-totalintermediaire2;
+        // alert (delta);
         if (delta>0) {
-            imgsrc="url(images/MP"+ delta + ".png)";
+            imgsrc="url(images/"+ delta + "U.png)";
             tdHP1.style.backgroundImage=imgsrc;      
             tdHP1.style.backgroundPosition="center";
         }
         if (delta<0) {
             var absdelta = -delta;
-            imgsrc="url(images/MP"+ absdelta + ".png)";
+            imgsrc="url(images/"+ absdelta + "U.png)";
             tdHP2.style.backgroundImage=imgsrc;     
             tdHP2.style.backgroundPosition="center";
         }
         if (delta==0) {
-        imgsrc="url(images/MP0.png)";
+        imgsrc="url(images/AS.png)";
         tdHP1.style.backgroundImage=imgsrc;
         tdHP1.style.backgroundPosition="center";
         tdHP2.style.backgroundImage=imgsrc;      
@@ -597,7 +599,7 @@ function affichetotaux()
     var xstrtmp="";
     var xtt;
 
-    if (nbjoueurs==2)
+    if ((nbjoueurs==2)&&(gamemode==2))
     {
              //display match play   
             var delta = points[21][0]-points[21][1];
@@ -615,7 +617,7 @@ function affichetotaux()
                 tdscore2.style.backgroundPosition="center";
             }
             if (delta==0) {
-            imgsrc="url(images/MP0.png)";
+            imgsrc="url(images/AS.png)";
             var tdscore1 = document.getElementById("Score1net");
             var tdscore2 = document.getElementById("Score2net");
             tdscore1.style.backgroundPosition="center";
@@ -625,90 +627,96 @@ function affichetotaux()
             }
     }
     else {
-    
-    for (jz=0;jz<parseInt(nbjoueurs);jz++) {     
-     // Affiche les totaux OUT IN et TOTAL
-        var tmp2=jz+1;
-        if (score[21][jz]!=0) {
-            var tmp = "Score"+tmp2;
-            var tt = document.getElementById(tmp);
-            tt.innerHTML=score[21][jz]; 
-        }
-
-        //Affiche les scores nets
-        if (points[21][jz]!=0) {
-            tmp = "Score"+tmp2+"net";
-            //alert ("id à retrouver = "+tmp);
-            var tt = document.getElementById(tmp);
-            //alert ("points21 " + j + " "+ points[21][j]);
-            tt.innerHTML=points[21][jz]; 
-        }
-        if (points[21][jz]==0) {
-            for (xtmp=1;xtmp<=b18T;xtmp++){
-                xstrtmp="H"+xtmp+"P"+tmp2+"net";
-                xtt = document.getElementById(xstrtmp);
-                if (xtt.innerHTML!="") {
-                    tmp = "Score"+tmp2+"net";
-                    var tt = document.getElementById(tmp);
-                    tt.innerHTML='0'; 
-                }
+         
+        for (jz=0;jz<parseInt(nbjoueurs);jz++) {     
+         // Affiche les totaux OUT IN et TOTAL
+            var tmp2=jz+1;
+            if (score[21][jz]!=0) {
+                var tmp = "Score"+tmp2;
+                var tt = document.getElementById(tmp);
+                tt.innerHTML=score[21][jz]; 
             }
-        }
-    }
-
-    if (b18T==18){
-        if (score[19][jz]!==0){
-            tmp = "OUT"+tmp2;
-            tt = document.getElementById(tmp);
-            tt.innerHTML=score[19][jz]; 
-            tmp = "OUT"+tmp2+"bis";
-            tt = document.getElementById(tmp);
-            tt.innerHTML=score[19][jz];
-            tmp = "IN"+tmp2;
-            tt = document.getElementById(tmp);
-            tt.innerHTML=score[20][jz]; 
-        }
             
-            if (points[19][jz]!=0){
-                tmp = "OUT"+tmp2+"net";
-                tt = document.getElementById(tmp);
-                tt.innerHTML=points[19][jz]; 
-                tmp = "OUT"+tmp2+"bisnet";
-                tt = document.getElementById(tmp);
-                tt.innerHTML=points[19][jz];
+            //Affiche les scores nets
+            if (points[21][jz]!=0) {
+                tmp = "Score"+tmp2+"net";
+     //           alert ("id à retrouver = "+tmp);
+                var tt = document.getElementById(tmp);
+    //            alert ("points21 " + j + " "+ points[21][jz]);
+                tt.innerHTML=points[21][jz]; 
             }
-            if (points[19][jz]==0){
-                for (xtmp=1;xtmp<19;xtmp++){
-                xstrtmp="H"+xtmp+"P"+tmp2+"net";
-                xtt = document.getElementById(xstrtmp);
-                if (xtt.innerHTML!="") {
-                    tmp = "OUT"+tmp2+"net";
-                    tt = document.getElementById(tmp);
-                    tt.innerHTML='0'; 
-                    tmp = "OUT"+tmp2+"bisnet";
-                    tt = document.getElementById(tmp);
-                    tt.innerHTML='0';
-                    break;
-                    }
-                }    
-            }
-            if (points[20][jz]!=0){
-                tmp = "IN"+tmp2+"net";
-                tt = document.getElementById(tmp);
-                tt.innerHTML=points[20][jz];
-            }
-            if (points[20][jz]==0){
-                var xtmp=0;
-                var xstrtmp="";
-                var xtt;
-                for (xtmp=1;xtmp<19;xtmp++){
+            if (points[21][jz]==0) {
+                for (xtmp=1;xtmp<=b18T;xtmp++){
                     xstrtmp="H"+xtmp+"P"+tmp2+"net";
                     xtt = document.getElementById(xstrtmp);
                     if (xtt.innerHTML!="") {
-                        tmp = "IN"+tmp2+"net";
+                        tmp = "Score"+tmp2+"net";
+                        var tt = document.getElementById(tmp);
+                        tt.innerHTML='0'; 
+                    }
+                }
+            }       
+
+            // alert (points[19][0]);
+            // alert (score[19][0]);
+
+            if (b18T==18){
+            //    alert (jz);
+
+                    if (score[19][jz]!==0){
+                    tmp = "OUT"+tmp2;
+                    tt = document.getElementById(tmp);
+                    tt.innerHTML=score[19][jz]; 
+                    tmp = "OUT"+tmp2+"bis";
+                    tt = document.getElementById(tmp);
+                    tt.innerHTML=score[19][jz];
+                    tmp = "IN"+tmp2;
+                    tt = document.getElementById(tmp);
+                    tt.innerHTML=score[20][jz]; 
+                }
+
+                if (points[19][jz]!==0){
+
+                    tmp = "OUT"+tmp2+"net";
+                    tt = document.getElementById(tmp);
+                    tt.innerHTML=points[19][jz]; 
+                    tmp = "OUT"+tmp2+"bisnet";
+                    tt = document.getElementById(tmp);
+                    tt.innerHTML=points[19][jz];
+                }
+                if (points[19][jz]==0){
+                    for (xtmp=1;xtmp<19;xtmp++){
+                    xstrtmp="H"+xtmp+"P"+tmp2+"net";
+                    xtt = document.getElementById(xstrtmp);
+                    if (xtt.innerHTML!="") {
+                        tmp = "OUT"+tmp2+"net";
+                        tt = document.getElementById(tmp);
+                        tt.innerHTML='0'; 
+                        tmp = "OUT"+tmp2+"bisnet";
                         tt = document.getElementById(tmp);
                         tt.innerHTML='0';
                         break;
+                        }
+                    }    
+                }
+                if (points[20][jz]!=0){
+                        tmp = "IN"+tmp2+"net";
+                        tt = document.getElementById(tmp);
+                        tt.innerHTML=points[20][jz];
+                    }
+                if (points[20][jz]==0){
+                    var xtmp=0;
+                    var xstrtmp="";
+                    var xtt;
+                    for (xtmp=1;xtmp<19;xtmp++){
+                        xstrtmp="H"+xtmp+"P"+tmp2+"net";
+                        xtt = document.getElementById(xstrtmp);
+                        if (xtt.innerHTML!="") {
+                            tmp = "IN"+tmp2+"net";
+                            tt = document.getElementById(tmp);
+                            tt.innerHTML='0';
+                            break;
+                        }
                     }
                 }
             }
