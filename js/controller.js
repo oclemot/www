@@ -462,16 +462,16 @@ function setrepere (idrepere)
     
     switch (idrepere){
          case 1:
-                tmp.style.backgroundImage="url(images/reper_blanc.gif)";
+                tmp.style.backgroundImage="url(images/blanc.png)";
                 break;
          case 2:
-                tmp.style.backgroundImage="url(images/reper_jaune.gif)";
+                tmp.style.backgroundImage="url(images/jaune.png)";
                 break;
          case 3:
-                tmp.style.backgroundImage="url(images/reper_bleu.gif)";
+                tmp.style.backgroundImage="url(images/bleu.png)";
                 break;
          case 4:
-                tmp.style.backgroundImage="url(images/reper_rouge.gif)";
+                tmp.style.backgroundImage="url(images/rouge.png)";
                 break;
     }
     joueursreperes[parseInt(tmp3)-1]=idrepere;

@@ -37,7 +37,7 @@ function init_variables ()
 {
     nbjoueurs= 3;    
     gamemode = 1; //chouette
-    b18T =18;
+    b18T = 18;
     currentcell="";
     
     // Wait for device API libraries to load

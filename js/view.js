@@ -135,10 +135,10 @@ function createreperesmenu ()
     strtable+="<form id='test'>";
     strtable+="<table id='reperesmenu2'>";
     strtable+="<tr>"; 
-    strtable+="<td onclick='setrepere(1);'> <img src = 'images/reper_blanc.gif'> </td>";
-    strtable+="<td onclick='setrepere(2);'> <img src = 'images/reper_jaune.gif'> </td>";
-    strtable+="<td onclick='setrepere(3);'> <img src = 'images/reper_bleu.gif'> </td>";
-    strtable+="<td onclick='setrepere(4);'> <img src = 'images/reper_rouge.gif'> </td>";
+    strtable+="<td onclick='setrepere(1);'> <img src = 'images/blanc.png'> </td>";
+    strtable+="<td onclick='setrepere(2);'> <img src = 'images/jaune.png'> </td>";
+    strtable+="<td onclick='setrepere(3);'> <img src = 'images/bleu.png'> </td>";
+    strtable+="<td onclick='setrepere(4);'> <img src = 'images/rouge.png'> </td>";
     strtable+="</tr>";
     strtable+="</table> </form>";
 
@@ -204,7 +204,9 @@ function createsettingsmenu()
     stmpform+="<div class='ui-grid-a'>";
 
     stmpform+="<div class='ui-block-a'>";    
-    stmpform+="<label for='flip9T'>Type de parcours (9t ou 18t) :</label> </div> <div class='ui-block-b'> <select name='flip9T' id='flip9T' data-role='slider'> <option value='off'>18t</option> <option value='on'>9t</option> </select> </div>";
+    stmpform+="<label for='flip9T'>Type de parcours (9t ou 18t) :</label> </div> <div class='ui-block-b'> <select name='flip9T' id='flip9T' data-role='slider'>";
+    stmpform+="<option value='off'>18t</option> <option value='on'>9t";
+    stmpform+="</option> </select> </div>";
 
 
     stmpform+="<div class='ui-block-a'>";    
@@ -214,7 +216,7 @@ function createsettingsmenu()
     //stmpform+="<div class='ui-field-contain'>";
 
     stmpform+="<div class='ui-block-a'>";
-    stmpform+="<label for='flipmode'>Chouette ou Stableford :</label> </div> <div class='ui-block-b'> <select name='flipmode' id='flipmode' data-role='slider'> <option value='off'>Chouette</option> <option value='on'>Stableford</option> </select></div></div>";
+    stmpform+="<label for='flipmode'>Chouette ou Stableford :</label> </div> <div class='ui-block-b'> <select name='flipmode' id='flipmode' data-role='slider'> <option value='off'>Match play</option> <option value='on'>Stableford</option> </select></div></div>";
 
     stmpform+="</div>"
 
@@ -296,6 +298,22 @@ function affichesettingsmenu ()
     var defaultcourseli= document.getElementById("defaultcourse");
     defaultcourseli.innerHTML = coursename + " Par : "+coursepartotal;
     var keypadobject = document.getElementById("menuoptions");
+
+    if (b18T==18)
+        $('#flip9T').val('off');
+    else 
+        $('#flip9T').val('on');
+    $('#flip9T').slider('refresh');
+
+    if (gamemode==1)
+        $('#flipmode').val('off');
+    else 
+        $('#flipmode').val('on');
+    $('#flipmode').slider('refresh');
+    
+    $('#sliderplayers').val(nbjoueurs);
+    $('#sliderplayers').slider('refresh');
+    
     keypadobject.style.display = "block";
 }
 
@@ -467,7 +485,7 @@ function createtableandhandlers()
               tmpid ="H"+ i + "P" + j;
               tbody+="<td id='"+ tmpid +"' onclick = 'addInputNumber(this,1)' style='width: 40px; background-repeat: no-repeat;text-align:center;background-color:#009245'></td>";
               tmpid ="H"+ i + "P" + j + "net";
-              tbody+="<td id='" +tmpid +"' style='width: 40px; background-color:#34cf07;text-align:center;'></td>";
+              tbody+="<td id='" +tmpid +"' style='width: 40px; background-color:#34cf07;background-repeat: no-repeat;text-align:center;'></td>";
             }
         }
 
@@ -536,7 +554,7 @@ function affichescoresbrut (idhole)
  
 function affichescoresnet (idhole)
 {
-if ((nbjoueurs!=2)||(gamemode==1)) {    
+if ((nbjoueurs!=2)||(gamemode==2)) {    
      for (j=0;j<parseInt(nbjoueurs);j++) {     
          var tmp2=j+1;
 
@@ -599,32 +617,106 @@ function affichetotaux()
     var xstrtmp="";
     var xtt;
 
-    if ((nbjoueurs==2)&&(gamemode==2))
+    if ((nbjoueurs==2)&&(gamemode==1))
     {
-             //display match play   
-            var delta = points[21][0]-points[21][1];
+             //display match play
+        var i=1;
+        while ((score[i][0]!=0) && (score[i][1]!=0)) {
+        i++;    
+        }
+        if ((score[i][0]==0) || (score[i][1]==0))
+            if ((score[i][0]!=0) || (score[i][1]!=0)) return ;
+        
+//Affiche ligne total        
+        var delta = points[21][0]-points[21][1];
+       //alert (delta);
+        if (delta>0) {
+            imgsrc="url(images/"+ delta + "U.png)";
+            var tdscore1 = document.getElementById("Score1net");
+            tdscore1.style.backgroundImage=imgsrc;
+            tdscore1.style.backgroundPosition="center";
+        }
+        if (delta<0) {
+            var absdelta = -delta;
+            imgsrc="url(images/"+ absdelta + "U.png)";
+            var tdscore2 = document.getElementById("Score2net");
+            tdscore2.style.backgroundImage=imgsrc;
+            tdscore2.style.backgroundPosition="center";
+        }
+        if (delta==0) {
+        imgsrc="url(images/AS.png)";
+        var tdscore1 = document.getElementById("Score1net");
+        var tdscore2 = document.getElementById("Score2net");
+        tdscore1.style.backgroundPosition="center";
+        tdscore2.style.backgroundPosition="center";
+        tdscore1.style.backgroundImage=imgsrc;      
+        tdscore2.style.backgroundImage=imgsrc;      
+        }
+
+        //Affiche ligne IN et OUT si b18T==18
+        if (b18T==18) {
+            delta = points[20][0]-points[20][1];
             if (delta>0) {
-                imgsrc="url(images/MP"+ delta + ".png)";
-                var tdscore1 = document.getElementById("Score1net");
+                imgsrc="url(images/"+ delta + "U.png)";
+                tdscore1 = document.getElementById("IN1net");
                 tdscore1.style.backgroundImage=imgsrc;
                 tdscore1.style.backgroundPosition="center";
             }
             if (delta<0) {
                 var absdelta = -delta;
-                imgsrc="url(images/MP"+ absdelta + ".png)";
-                var tdscore2 = document.getElementById("Score2net");
+                imgsrc="url(images/"+ absdelta + "U.png)";
+                tdscore2 = document.getElementById("IN2net");
                 tdscore2.style.backgroundImage=imgsrc;
                 tdscore2.style.backgroundPosition="center";
             }
             if (delta==0) {
             imgsrc="url(images/AS.png)";
-            var tdscore1 = document.getElementById("Score1net");
-            var tdscore2 = document.getElementById("Score2net");
+            tdscore1 = document.getElementById("IN1net");
+            tdscore2 = document.getElementById("IN2net");
             tdscore1.style.backgroundPosition="center";
             tdscore2.style.backgroundPosition="center";
             tdscore1.style.backgroundImage=imgsrc;      
             tdscore2.style.backgroundImage=imgsrc;      
             }
+
+            delta = points[19][0]-points[19][1];
+            if (delta>0) {
+                imgsrc="url(images/"+ delta + "U.png)";
+                tdscore1 = document.getElementById("OUT1net");
+                tdscore1.style.backgroundImage=imgsrc;
+                tdscore1.style.backgroundPosition="center";
+                tdscore1 = document.getElementById("OUT1bisnet");
+                tdscore1.style.backgroundImage=imgsrc;
+                tdscore1.style.backgroundPosition="center";
+
+            }
+            if (delta<0) {
+                var absdelta = -delta;
+                imgsrc="url(images/"+ absdelta + "U.png)";
+                tdscore2 = document.getElementById("OUT2net");
+                tdscore2.style.backgroundImage=imgsrc;
+                tdscore2.style.backgroundPosition="center";
+                tdscore2 = document.getElementById("OUT2bisnet");
+                tdscore2.style.backgroundImage=imgsrc;
+                tdscore2.style.backgroundPosition="center";
+            }
+            if (delta==0) {
+            imgsrc="url(images/AS.png)";
+            tdscore1 = document.getElementById("OUT1net");
+            tdscore2 = document.getElementById("OUT2net");
+            tdscore1.style.backgroundPosition="center";
+            tdscore2.style.backgroundPosition="center";
+            tdscore1.style.backgroundImage=imgsrc;      
+            tdscore2.style.backgroundImage=imgsrc;      
+            
+            tdscore1 = document.getElementById("OUT1bisnet");
+            tdscore2 = document.getElementById("OUT2bisnet");
+            tdscore1.style.backgroundPosition="center";
+            tdscore2.style.backgroundPosition="center";
+            tdscore1.style.backgroundImage=imgsrc;      
+            tdscore2.style.backgroundImage=imgsrc;      
+            }
+        }
     }
     else {
          
@@ -656,9 +748,6 @@ function affichetotaux()
                     }
                 }
             }       
-
-            // alert (points[19][0]);
-            // alert (score[19][0]);
 
             if (b18T==18){
             //    alert (jz);
@@ -752,16 +841,16 @@ function affichereperes ()
 
     switch (joueursreperes[tz]){
          case 1:
-                td.style.backgroundImage="url(images/reper_blanc.gif)";
+                td.style.backgroundImage="url(images/blanc.png)";
                 break;
          case 2:
-                td.style.backgroundImage="url(images/reper_jaune.gif)";
+                td.style.backgroundImage="url(images/jaune.png)";
                 break;
          case 3:
-                td.style.backgroundImage="url(images/reper_bleu.gif)";
+                td.style.backgroundImage="url(images/bleu.png)";
                 break;
          case 4:
-                td.style.backgroundImage="url(images/reper_rouge.gif)";
+                td.style.backgroundImage="url(images/rouge.png)";
                 break;
         }
    }
@@ -888,8 +977,6 @@ function effacejoueurs ()
 
 function affichetout ()
 {
-    //alert ("affiche tout");
-    
     setcache ();
     
     createtableandhandlers ();
