@@ -1,0 +1,75 @@
+function addkey(key, idobject){    
+
+    var td=document.getElementById(idobject);
+    
+    var tmp = String(idobject);
+    var pos = tmp.indexOf ("P"); 
+    var tmp3=tmp.slice (pos+2, pos+5);
+    
+    var tmp2= tmp.slice(pos+1,pos+2);
+    var currentplayer = parseInt(tmp2);
+    currentplayer--;
+
+    var tmp4=td.innerHTML;
+    
+    if (tmp3==="Idx"){
+        scoreallowed=false;
+        //joueuridx[currentplayer][0]=key;
+        if (key===66) {
+            //alert (tmp4.indexOf(","));
+            if (tmp4.indexOf(",")==-1) key=".";
+            else key="";
+        }   
+        if (key===67) {
+            td.innerHTML="";
+            key="";
+            effacecoupsrecus();
+        }
+    }
+    else {    
+
+        var tmp3 = tmp.slice(1,pos);
+        var currenthole = parseInt (tmp3);
+
+        if (key===67) {
+            key=0;
+            td.innerHTML="0";
+        }
+        score[currenthole][currentplayer]= parseInt(key);
+        //alert ("score ="+ score[currenthole][currentplayer]);
+        
+        
+        calculepointsnet (currenthole);  
+        calculetotaux();
+        affichetotaux ();
+        cachekeypad();
+        clearInterval(xblink);
+        td.style.backgroundColor=currbg;
+        td.innerHTML="";
+    }
+    if (key===77){
+        cachekeypad();
+        clearInterval(xblink);
+        td.style.backgroundColor=currbg;
+        //alert ("currentplayer=" + currentplayer);
+        if (parseFloat(td.innerHTML)>54) td.innerHTML="54";
+        joueursindex[currentplayer]=parseFloat(td.innerHTML);
+        //alert ("indexjoueur ="+ joueursindex[currentplayer]);
+        if (gamemode==2){
+            calculecoupsrecus ();
+            effacecoupsrecus();
+            affichecoupsrecus ();
+
+            for (ff=1;ff<=b18T;ff++){
+                calculepointsnet(ff);
+                affichescoresnet(ff);
+            }
+            affichetotaux ();
+        }
+        scoreallowed=true;
+        return;
+    }
+    if (td.innerHTML==='0') td.innerHTML='';
+    else td.innerHTML+=key;
+    //alert ("cache");
+}
